@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/whishlist-service/command/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/whishlist-service/command",
+        "main": "apps/whishlist-service/command/src/main.ts",
+        "tsConfig": "apps/whishlist-service/command/tsconfig.app.json",
+        "assets": ["apps/whishlist-service/command/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/whishlist-service/command/src/environments/environment.ts",
+              "with": "apps/whishlist-service/command/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "whishlist-service-command:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "whishlist-service-command:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/whishlist-service/command/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/whishlist-service/command"],
+      "options": {
+        "jestConfig": "apps/whishlist-service/command/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

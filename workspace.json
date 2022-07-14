@@ -1,5 +1,14 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "admin-portal-service-command": "apps/admin-portal-service/command",
+    "admin-portal-service-query": "apps/admin-portal-service/query",
+    "order-service-command": "apps/order-service/command",
+    "order-service-query": "apps/order-service/query",
+    "web-portal-service-command": "apps/web-portal-service/command",
+    "web-portal-service-query": "apps/web-portal-service/query",
+    "whishlist-service-command": "apps/whishlist-service/command",
+    "whishlist-service-query": "apps/whishlist-service/query"
+  }
 }
