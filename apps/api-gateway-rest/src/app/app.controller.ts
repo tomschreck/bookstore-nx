@@ -12,7 +12,7 @@ export class AppController {
 
   @Post('/create-book')
   create(@Body() createBookDto) {
-    Logger.log(`POST | CREATE BOOK: ${createBookDto.title}`, 'BOOKSTORE-API-GATEWAY-REST');
+    Logger.log(`01 | REST: POST CREATE BOOK: ${createBookDto.title}`, 'BOOKSTORE-API-GATEWAY-REST');
     this.appService.createBook(createBookDto).subscribe();
   }
 }

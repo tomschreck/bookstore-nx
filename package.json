@@ -5,13 +5,15 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "start:api": "nx run-many --target=serve --all"
   },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^9.0.3",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.3",
+    "@nestjs/cqrs": "^9.0.1",
     "@nestjs/microservices": "^9.0.3",
     "@nestjs/platform-express": "^9.0.3",
     "@nestjs/typeorm": "^9.0.0",

@@ -5,6 +5,8 @@
     "admin-portal-service-command": "apps/admin-portal-service/command",
     "admin-portal-service-query": "apps/admin-portal-service/query",
     "api-gateway-rest": "apps/api-gateway-rest",
+    "ddd-core": "libs/ddd-core",
+    "domains-book-domain": "libs/domains/book-domain",
     "order-service-command": "apps/order-service/command",
     "order-service-query": "apps/order-service/query",
     "web-portal-service-command": "apps/web-portal-service/command",

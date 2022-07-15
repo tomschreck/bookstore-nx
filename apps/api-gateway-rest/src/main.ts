@@ -11,7 +11,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(globalPrefix);
 
-  await app.listen(port).then(() => logger.log(`Bookstore REST API Gateway is running on: http://localhost:${port}/${globalPrefix}`));
+  await app.listen(port).then(() => {
+    logger.log(`Bookstore REST API Gateway is running on: http://localhost:${port}/${globalPrefix}`);
+    logger.log('---------------------------------------------------------------------------------------------------');
+    logger.log('');
+    logger.log('');
+  });
 }
 
 bootstrap();

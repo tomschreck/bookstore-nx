@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
@@ -13,6 +13,7 @@ export class AppService {
   }
 
   createBook(createBookDto) {
+    Logger.log(`02 | SERVICE: INITIATE TCP`, 'BOOKSTORE-API-GATEWAY-REST');
     return this.client.send({ role: 'book', cmd: 'create' }, createBookDto);
   }
 }

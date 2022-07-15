@@ -1,9 +1,10 @@
+import { BookDomainModule } from '@bookstore-nx/domains/book-domain';
 import { Module } from "@nestjs/common";
 import { CreateBookController } from "./create-book.controller";
-import { CreateBookService } from "./create-book.service";
 
 @Module({
+  imports: [BookDomainModule],
   controllers: [CreateBookController],
-  providers: [CreateBookService],
+  providers: [],
 })
-export class CreateBookModule {}
+export class CreateBookModule { }
