@@ -14,7 +14,12 @@ async function bootstrap() {
     }
   );
 
-  await app.listen().then(() => logger.log('Microservice is listening...'));
+  await app.listen().then(() => {
+    logger.log('Admin Portal Microservice is listening...');
+    logger.log('-------------------------------------------------------------------------------------');
+    logger.log('');
+    logger.log('');
+  });
 }
 
 bootstrap();

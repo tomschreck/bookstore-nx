@@ -13,7 +13,7 @@ export class AppService {
   }
 
   createBook(createBookDto) {
-    Logger.log(`02 | SERVICE: INITIATE TCP`, 'BOOKSTORE-API-GATEWAY-REST');
+    Logger.log(`02 | SERVICE: INITIATE TCP COMMUNICATION`, 'BOOKSTORE-API-GATEWAY-REST');
     return this.client.send({ role: 'book', cmd: 'create' }, createBookDto);
   }
 }

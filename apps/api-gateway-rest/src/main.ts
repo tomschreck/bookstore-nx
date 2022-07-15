@@ -13,7 +13,7 @@ async function bootstrap() {
 
   await app.listen(port).then(() => {
     logger.log(`Bookstore REST API Gateway is running on: http://localhost:${port}/${globalPrefix}`);
-    logger.log('---------------------------------------------------------------------------------------------------');
+    logger.log('-------------------------------------------------------------------------------------');
     logger.log('');
     logger.log('');
   });
