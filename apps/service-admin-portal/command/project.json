@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/service-admin-portal/command/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/service-admin-portal/command",
+        "main": "apps/service-admin-portal/command/src/main.ts",
+        "tsConfig": "apps/service-admin-portal/command/tsconfig.app.json",
+        "assets": ["apps/service-admin-portal/command/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/service-admin-portal/command/src/environments/environment.ts",
+              "with": "apps/service-admin-portal/command/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "service-admin-portal-command:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "service-admin-portal-command:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/service-admin-portal/command/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/service-admin-portal/command"],
+      "options": {
+        "jestConfig": "apps/service-admin-portal/command/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
