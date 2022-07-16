@@ -3,11 +3,11 @@ export const CONFIG =
 {
   POSTGRES:
   {
-    HOST: process.env.POSTGRESQL_HOST,
-    PORT: process.env.POSTGRESQL_PORT,
-    DATABASE_NAME: process.env.POSTGRESQL_DB_NAME,
-    USER: process.env.POSTGRESQL_USERNAME,
-    PASSWORD: process.env.POSTGRESQL_PASSWORD
+    HOST: process.env.POSTGRES_HOST,
+    PORT: process.env.POSTGRES_PORT,
+    DATABASE_NAME: process.env.POSTGRES_DATABASE,
+    USER: process.env.POSTGRES_USERNAME,
+    PASSWORD: process.env.POSTGRES_PASSWORD
   },
   REGEX:
   {
