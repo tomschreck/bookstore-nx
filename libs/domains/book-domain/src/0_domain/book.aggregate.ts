@@ -25,9 +25,15 @@ export class BookAggregate extends Aggregate<CreateBookDto> {
     super(props, id);
     this._book = book;
 
+    // console.log(`IS NEW AGGREGATE: ${this.isNewAggregate}`);
+    // console.log(`props id: ${props.id}`);
+    // console.log(`this id: ${this.id}`);
+    // console.log(`book.props id: ${book.id}`);
 
-    console.log(`IS NEW IDENTIFIER: ${this._id.isNewIdentifier}`);
-    this.apply(BookCreatedEvent.create(this.props));
+    if (this.isNewAggregate)
+    {
+      this.apply(BookCreatedEvent.create(this.props));
+    }
   }
 
 
@@ -41,7 +47,7 @@ export class BookAggregate extends Aggregate<CreateBookDto> {
       return failure(bookResult.getError());
     }
 
-    const bookAggregate = new BookAggregate(props, bookResult.getValue(), id);
+    const bookAggregate = new BookAggregate({ ...props, id: props.id || id.toString() }, bookResult.getValue(), id);
 
     return success(bookAggregate);
   }

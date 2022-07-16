@@ -1,4 +1,3 @@
-import { Logger } from '@nestjs/common';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { BookCreatedEvent } from '../../../0_domain';
 import { CreateBookDto } from '../../../shared';
@@ -14,9 +13,6 @@ export class BookCreatedSaveEventHandler implements IEventHandler<BookCreatedEve
 
   public async handle(event: BookCreatedEvent): Promise<void>
   {
-
-    Logger.log(`06 | EVENT HANDLER: BOOK CREATED, NOW SAVE ${event.createBookDto.title}`, 'BOOK DOMAIN');
-
     const createBookDto: CreateBookDto = event.createBookDto;
 
     const bookEntity: BookEntity = new BookEntity();

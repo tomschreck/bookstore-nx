@@ -1,5 +1,5 @@
 import { IUseCase } from '@bookstore-nx/ddd-core';
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateBookCommand } from '../../1_application/commands';
 import { CreateBookDto } from '../../shared';
@@ -12,9 +12,6 @@ export class CreateBookUseCase implements IUseCase<CreateBookDto, void> {
 
   async executeAsync(input: CreateBookDto): Promise<void>
   {
-
-    Logger.log(`04 | USE CASE: CREATE COMMAND`, 'BOOK DOMAIN');
-
     const command: CreateBookCommand = CreateBookCommand.create(input);
     return this.commandBus.execute(command);
   }

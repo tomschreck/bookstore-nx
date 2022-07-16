@@ -1,6 +1,7 @@
-import { Logger } from '@nestjs/common';
+import { UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { BookAggregate, BookAggregateResult } from '../../../0_domain';
+import { CreateBookDto } from '../../../shared';
 import { CreateBookCommand } from '../../commands';
 
 
@@ -16,20 +17,15 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
   {
     return new Promise((resolve, reject) =>
     {
-      Logger.log(`05 | COMMAND HANDLER: CREATE AGGREGATE`, 'BOOK DOMAIN');
-
-      const bookAggregateResult: BookAggregateResult = BookAggregate.create(command.createBookDto);
-
-      Logger.log(`05 | IS BOOK AGGREGATE: ${bookAggregateResult.isSuccess()}`, 'BOOK DOMAIN');
+      const createBookDto: CreateBookDto = command.createBookDto;
+      const bookAggregateResult: BookAggregateResult = BookAggregate.create(createBookDto, UniqueEntityID.create(createBookDto.id));
 
 
       if (bookAggregateResult.isSuccess())
       {
         const bookAggregate: BookAggregate = bookAggregateResult.getValue();
 
-        Logger.log(bookAggregate.book.props, 'BOOK DOMAIN');
-
-        // mergeObjectContext & commit kick off events in aggregate...
+        // mergeObjectContext & commit PUBLISH EVENTS FROM AGGREGATE...
         this.eventPublisher.mergeObjectContext(bookAggregate);
         bookAggregate.commit();
         resolve();
@@ -39,7 +35,6 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
 
       if (bookAggregateResult.isFailure())
       {
-        Logger.log(`05 | BOOK ERROR: ${bookAggregateResult.getError().message}`, 'BOOK DOMAIN');
         reject(bookAggregateResult.getError());
         return;
       }

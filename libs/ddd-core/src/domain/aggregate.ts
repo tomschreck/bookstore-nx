@@ -13,6 +13,11 @@ export abstract class Aggregate<T> extends AggregateRoot
     return this._id;
   }
 
+  get isNewAggregate(): boolean
+  {
+    return this._id.isNewIdentifier;
+  }
+
   constructor(props: T, id?: UniqueEntityID)
   {
     super();

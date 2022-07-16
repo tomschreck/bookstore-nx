@@ -1,2 +1,1 @@
-export * from './handlers';
-export * from './repos';
+export * from './database.module';

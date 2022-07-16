@@ -12,6 +12,11 @@ export abstract class Entity<T>
   protected readonly _id: UniqueEntityID;
   public readonly props: T;
 
+  get id(): UniqueEntityID
+  {
+    return this._id;
+  }
+
   constructor(props: T, id?: UniqueEntityID)
   {
     this._id = id ? id : UniqueEntityID.create();
