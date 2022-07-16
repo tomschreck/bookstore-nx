@@ -1,5 +1,13 @@
 
-export interface CreateBookDto {
+export interface CreateBookDto
+{
   id?: string;
-  name: string
+  title: string;
+  author: string;
+  isbn: string;
+  category: string;
+  status: string;
+  price: number;
+  inventory: number;
+  notes: string;
 }

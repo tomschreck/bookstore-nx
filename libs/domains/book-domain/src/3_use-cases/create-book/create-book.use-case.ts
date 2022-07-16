@@ -10,12 +10,13 @@ export class CreateBookUseCase implements IUseCase<CreateBookDto, void> {
 
   constructor(readonly commandBus: CommandBus) { }
 
-  async executeAsync(input: CreateBookDto): Promise<void> {
+  async executeAsync(input: CreateBookDto): Promise<void>
+  {
 
     Logger.log(`04 | USE CASE: CREATE COMMAND`, 'BOOK DOMAIN');
 
-    const command: CreateBookCommand = CreateBookCommand.create(input)
-    await this.commandBus.execute(command);
+    const command: CreateBookCommand = CreateBookCommand.create(input);
+    return this.commandBus.execute(command);
   }
 
 }

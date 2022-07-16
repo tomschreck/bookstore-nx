@@ -2,11 +2,11 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "service-admin-portal-command": "apps/service-admin-portal/command",
-    "service-admin-portal-query": "apps/service-admin-portal/query",
     "api-gateway-rest": "apps/api-gateway-rest",
     "ddd-core": "libs/ddd-core",
     "domains-book-domain": "libs/domains/book-domain",
+    "service-admin-portal-command": "apps/service-admin-portal/command",
+    "service-admin-portal-query": "apps/service-admin-portal/query",
     "service-order-command": "apps/service-order/command",
     "service-order-query": "apps/service-order/query",
     "service-web-portal-command": "apps/service-web-portal/command",

@@ -3,9 +3,10 @@ import { NestFactory } from "@nestjs/core";
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from "./app.module";
 
-const logger = new Logger('SERVICE-ADMIN-PORTAL');
+const logger = new Logger('SERVICE-ADMIN-PORTAL-COMMAND');
 
-async function bootstrap() {
+async function bootstrap()
+{
 
   const app: INestMicroservice = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
@@ -14,7 +15,8 @@ async function bootstrap() {
     }
   );
 
-  await app.listen().then(() => {
+  await app.listen().then(() =>
+  {
     logger.log('Admin Portal Microservice is listening...');
     logger.log('-------------------------------------------------------------------------------------');
     logger.log('');

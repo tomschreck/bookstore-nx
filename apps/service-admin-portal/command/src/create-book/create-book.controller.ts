@@ -5,12 +5,14 @@ import { MessagePattern } from '@nestjs/microservices';
 
 
 @Controller("create-book")
-export class CreateBookController {
+export class CreateBookController
+{
   constructor(private readonly createBookUseCase: CreateBookUseCase) { }
 
   @MessagePattern({ role: 'book', cmd: 'create' })
-  async createBook(createBookDto): Promise<void> {
-    Logger.log(`03 | CONTROLLER: EXECUTE USE CASE`, 'SERVICE-ADMIN-PORTAL');
+  async createBook(createBookDto): Promise<void>
+  {
+    Logger.log(`03 | CONTROLLER: EXECUTE USE CASE`, 'SERVICE-ADMIN-PORTAL-COMMAND');
 
     await this.createBookUseCase.executeAsync(createBookDto);
   }

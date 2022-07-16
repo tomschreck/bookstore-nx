@@ -1,3 +1,41 @@
 {
-  "exportall.config.folderListener": []
+  "exportall.config.folderListener": [],
+  "editor.autoIndent": "brackets",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true,
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "vscode.typescript-language-features",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "html.format.endWithNewline": true,
+  "html.format.indentHandlebars": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.wrapLineLength": 0,
+  "javascript.format.enable": true,
+  "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+  "javascript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.format.enable": true,
+  "typescript.format.insertSpaceAfterConstructor": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+  "typescript.format.placeOpenBraceOnNewLineForFunctions": true,
+  "typescript.format.semicolons": "insert",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescriptHero.imports.organizeOnSave": false,
+  "typescriptHero.imports.grouping": [
+    "Plains",
+    "Modules",
+    "Workspace"
+  ],
+  "typescriptHero.imports.multiLineWrapThreshold": 250,
+  "typescriptHero.imports.organizeSortsByFirstSpecifier": true,
+  "git.ignoreLimitWarning": true,
 }
