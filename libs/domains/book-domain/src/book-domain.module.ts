@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { CreateBookCommandHandler } from "./1_application";
 import { DatabaseModule } from './2_infrastructure';
-import { CreateBookUseCase } from "./3_use-cases";
+import { CreateBookUseCase, GetBookUseCase } from "./3_use-cases";
 
 
 @Module({
@@ -13,8 +13,9 @@ import { CreateBookUseCase } from "./3_use-cases";
   controllers: [],
   providers: [
     CreateBookUseCase,
-    CreateBookCommandHandler
+    CreateBookCommandHandler,
+    GetBookUseCase
   ],
-  exports: [ CreateBookUseCase ],
+  exports: [ CreateBookUseCase, GetBookUseCase ],
 })
 export class BookDomainModule { }

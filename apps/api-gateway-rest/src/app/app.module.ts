@@ -7,10 +7,11 @@ import { AppService } from "./app.service";
   imports: [
     ClientsModule.register(
       [
-        { name: 'ADMIN_PORTAL_MICROSERVICE', transport: Transport.TCP }
+        { name: 'SERVICE_ADMIN_PORTAL_COMMANDS', transport: Transport.TCP, options: { port: 3000 } },
+        { name: 'SERVICE_ADMIN_PORTAL_QUERIES', transport: Transport.TCP, options: { port: 3001 } }
       ])
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [ AppController ],
+  providers: [ AppService ],
 })
 export class AppModule { }

@@ -11,13 +11,17 @@ async function bootstrap()
   const app: INestMicroservice = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
-      transport: Transport.TCP
+      transport: Transport.TCP,
+      options:
+      {
+        port: 3000
+      }
     }
   );
 
   await app.listen().then(() =>
   {
-    logger.log('Admin Portal Microservice is listening...');
+    logger.log('Admin Portal Command Microservice is listening...');
     logger.log('-------------------------------------------------------------------------------------');
     logger.log('');
     logger.log('');

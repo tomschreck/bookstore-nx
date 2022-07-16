@@ -1,4 +1,5 @@
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { CreateBookDto } from '@bookstore-nx/domains/book-domain';
+import { Inject, Injectable } from "@nestjs/common";
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
@@ -6,17 +7,17 @@ export class AppService
 {
 
   constructor(
-    @Inject('ADMIN_PORTAL_MICROSERVICE') private readonly client: ClientProxy
+    @Inject('SERVICE_ADMIN_PORTAL_COMMANDS') private readonly clientCommands: ClientProxy,
+    @Inject('SERVICE_ADMIN_PORTAL_QUERIES') private readonly clientQueries: ClientProxy
   ) { }
 
-  getData(): { message: string; }
+  getData(id: string)
   {
-    return { message: "Welcome to api-gateway-rest!" };
+    return this.clientQueries.send({ role: 'book', cmd: 'get' }, id);
   }
 
-  createBook(createBookDto)
+  createBook(createBookDto: CreateBookDto)
   {
-    Logger.log(`02 | SERVICE: INITIATE TCP COMMUNICATION`, 'BOOKSTORE-API-GATEWAY-REST');
-    return this.client.emit({ role: 'book', cmd: 'create' }, createBookDto);
+    return this.clientCommands.emit({ role: 'book', cmd: 'create' }, createBookDto);
   }
 }

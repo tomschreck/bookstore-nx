@@ -1,29 +1,21 @@
-import { Body, Controller, Get, HttpException, Logger, Post } from "@nestjs/common";
-import { catchError } from 'rxjs';
+import { BookDto, CreateBookDto } from '@bookstore-nx/domains/book-domain';
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { firstValueFrom } from 'rxjs';
 import { AppService } from "./app.service";
 @Controller()
 export class AppController
 {
   constructor(private readonly appService: AppService) { }
 
-  @Get()
-  getData()
+  @Get(':id')
+  getData(@Param() params): Promise<BookDto>
   {
-    return this.appService.getData();
+    return firstValueFrom(this.appService.getData(params.id));
   }
 
   @Post('/create-book')
-  create(@Body() createBookDto)
+  create(@Body() createBookDto: CreateBookDto): Promise<void>
   {
-    Logger.log(`01 | REST: POST CREATE BOOK: ${createBookDto.title}`, 'BOOKSTORE-API-GATEWAY-REST');
-    this.appService.createBook(createBookDto)
-      .pipe
-      (
-        catchError((error) =>
-        {
-          console.log('WTF', error);
-          throw new HttpException(error, 500);
-        })
-      );
+    return firstValueFrom(this.appService.createBook(createBookDto));
   }
 }

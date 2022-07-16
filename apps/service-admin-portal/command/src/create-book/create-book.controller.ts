@@ -1,5 +1,5 @@
 
-import { CreateBookUseCase } from '@bookstore-nx/domains/book-domain';
+import { CreateBookDto, CreateBookUseCase } from '@bookstore-nx/domains/book-domain';
 import { Controller, Logger } from "@nestjs/common";
 import { MessagePattern } from '@nestjs/microservices';
 
@@ -10,7 +10,7 @@ export class CreateBookController
   constructor(private readonly createBookUseCase: CreateBookUseCase) { }
 
   @MessagePattern({ role: 'book', cmd: 'create' })
-  async createBook(createBookDto): Promise<void>
+  async createBook(createBookDto: CreateBookDto): Promise<void>
   {
     Logger.log(`03 | CONTROLLER: EXECUTE USE CASE`, 'SERVICE-ADMIN-PORTAL-COMMAND');
 

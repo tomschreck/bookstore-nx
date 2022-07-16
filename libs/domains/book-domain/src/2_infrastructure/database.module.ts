@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BookCreatedSaveEventHandler, BookCreatedSaveProjectionEventHandler } from './handlers';
+import { BookCreatedSaveEventHandler, BookCreatedSaveProjectionEventHandler, GetBookQueryHandler } from './handlers';
 import { BookEntity, BookReadOnlyEntity, BookReadOnlyRepository, BookRepository } from './repos';
 import { TypeOrmExModule } from './repos/database';
 
@@ -31,6 +31,6 @@ import { TypeOrmExModule } from './repos/database';
           BookReadOnlyRepository
         ]),
     ],
-  providers: [ BookCreatedSaveEventHandler, BookCreatedSaveProjectionEventHandler ]
+  providers: [ BookCreatedSaveEventHandler, BookCreatedSaveProjectionEventHandler, GetBookQueryHandler ]
 })
 export class DatabaseModule { }
