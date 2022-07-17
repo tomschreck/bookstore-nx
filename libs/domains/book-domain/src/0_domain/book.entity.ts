@@ -1,5 +1,5 @@
 import { DomainError, Either, Entity, failure, Guard, IGuardResult, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
-import { CreateBookDto } from '../shared';
+import { BookDataEntryDto } from '../shared';
 import { ISBN, ISBNResult } from './isbn.vo';
 
 
@@ -20,7 +20,7 @@ export class BookError extends DomainError
   }
 }
 
-export class Book extends Entity<CreateBookDto>
+export class Book extends Entity<BookDataEntryDto>
 {
   private _isbn: ISBN;
 
@@ -29,13 +29,13 @@ export class Book extends Entity<CreateBookDto>
     return this._isbn;
   }
 
-  private constructor(props: CreateBookDto, isbn: ISBN, id?: UniqueEntityID)
+  private constructor(props: BookDataEntryDto, isbn: ISBN, id?: UniqueEntityID)
   {
     super(props, id);
     this._isbn = isbn;
   }
 
-  static create(props: CreateBookDto, id?: UniqueEntityID): BookResult
+  static create(props: BookDataEntryDto, id?: UniqueEntityID): BookResult
   {
     const guardList: IGuardResult[] = [];
     guardList.push(Guard.againstNullOrUndefined(props.title, 'title'));

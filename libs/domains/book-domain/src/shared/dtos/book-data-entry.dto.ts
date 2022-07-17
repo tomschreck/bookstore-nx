@@ -1,5 +1,5 @@
 
-export interface CreateBookDto
+export interface BookDataEntryDto
 {
   id?: string;
   title: string;

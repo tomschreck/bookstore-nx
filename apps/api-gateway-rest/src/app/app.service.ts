@@ -1,4 +1,4 @@
-import { CreateBookDto } from '@bookstore-nx/domains/book-domain';
+import { BookDataEntryDto } from '@bookstore-nx/domains/book-domain';
 import { Inject, Injectable } from "@nestjs/common";
 import { ClientProxy } from '@nestjs/microservices';
 
@@ -16,8 +16,13 @@ export class AppService
     return this.clientQueries.send({ role: 'book', cmd: 'get' }, id);
   }
 
-  createBook(createBookDto: CreateBookDto)
+  createBook(bookDataEntryDto: BookDataEntryDto)
   {
-    return this.clientCommands.emit({ role: 'book', cmd: 'create' }, createBookDto);
+    return this.clientCommands.emit({ role: 'book', cmd: 'create' }, bookDataEntryDto);
+  }
+
+  saveBook(bookDataEntryDto: BookDataEntryDto)
+  {
+    return this.clientCommands.emit({ role: 'book', cmd: 'save' }, bookDataEntryDto);
   }
 }

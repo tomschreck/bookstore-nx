@@ -1,17 +1,17 @@
-import { ICommandHandler, QueryHandler } from '@nestjs/cqrs';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetBookQuery } from '../../../1_application';
 import { BookReadOnlyEntity, BookReadOnlyRepository } from '../../repos';
 
 
 @QueryHandler(GetBookQuery)
-export class GetBookQueryHandler implements ICommandHandler<GetBookQuery> {
+export class GetBookQueryHandler implements IQueryHandler<GetBookQuery, BookReadOnlyEntity> {
 
   constructor(
     private readonly bookReadOnlyRepository: BookReadOnlyRepository,
   ) { }
 
-  execute(command: GetBookQuery): Promise<BookReadOnlyEntity>
+  execute(query: GetBookQuery): Promise<BookReadOnlyEntity>
   {
-    return this.bookReadOnlyRepository.findOneBy({ id: command.id });
+    return this.bookReadOnlyRepository.findOneBy({ id: query.id });
   }
 }

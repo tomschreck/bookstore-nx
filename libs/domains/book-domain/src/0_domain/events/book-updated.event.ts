@@ -2,7 +2,7 @@ import { DomainEvent } from '@bookstore-nx/ddd-core';
 import { BookDataEntryDto } from '../../shared';
 
 
-export class BookCreatedEvent extends DomainEvent<BookDataEntryDto>
+export class BookUpdatedEvent extends DomainEvent<BookDataEntryDto>
 {
   get bookDataEntryDto(): BookDataEntryDto
   {
@@ -14,8 +14,8 @@ export class BookCreatedEvent extends DomainEvent<BookDataEntryDto>
     super(props);
   }
 
-  static create(props: BookDataEntryDto): BookCreatedEvent
+  static create(props: BookDataEntryDto): BookUpdatedEvent
   {
-    return new BookCreatedEvent(props);
+    return new BookUpdatedEvent(props);
   }
 }

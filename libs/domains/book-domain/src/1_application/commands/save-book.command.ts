@@ -2,7 +2,7 @@ import { CommandBase } from '@bookstore-nx/ddd-core';
 import { BookDataEntryDto } from '../../shared';
 
 
-export class CreateBookCommand extends CommandBase<BookDataEntryDto> {
+export class SaveBookCommand extends CommandBase<BookDataEntryDto> {
   get bookDataEntryDto(): BookDataEntryDto
   {
     return this.props;
@@ -13,8 +13,8 @@ export class CreateBookCommand extends CommandBase<BookDataEntryDto> {
     super(props);
   }
 
-  static create(props: BookDataEntryDto): CreateBookCommand
+  static create(props: BookDataEntryDto): SaveBookCommand
   {
-    return new CreateBookCommand(props);
+    return new SaveBookCommand(props);
   }
 }

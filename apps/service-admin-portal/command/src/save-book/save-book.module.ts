@@ -1,4 +1,11 @@
+import { BookDomainModule } from '@bookstore-nx/domains/book-domain';
 import { Module } from "@nestjs/common";
+import { SaveBookController } from './save-book.controller';
 
-@Module({})
-export class SaveBookModule {}
+
+@Module({
+  imports: [ BookDomainModule ],
+  controllers: [ SaveBookController ],
+  providers: []
+})
+export class SaveBookModule { }

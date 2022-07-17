@@ -1,2 +1,2 @@
+export * from './book-data-entry.dto';
 export * from './book.dto';
-export * from './create-book.dto';

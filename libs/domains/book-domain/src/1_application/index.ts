@@ -1,3 +1,3 @@
+export * from './application.module';
 export * from './commands';
-export * from './handlers';
 export * from './queries';

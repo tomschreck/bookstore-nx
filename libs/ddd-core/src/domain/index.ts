@@ -6,6 +6,7 @@ export * from './either';
 export * from './entity';
 export * from './guard';
 export * from './identifier';
+export * from './query';
 export * from './unique-entity-id';
 export * from './use-case';
 export * from './value-object';

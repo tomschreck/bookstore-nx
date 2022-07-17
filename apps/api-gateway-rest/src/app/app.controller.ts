@@ -1,5 +1,5 @@
-import { BookDto, CreateBookDto } from '@bookstore-nx/domains/book-domain';
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { BookDataEntryDto, BookDto } from '@bookstore-nx/domains/book-domain';
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { firstValueFrom } from 'rxjs';
 import { AppService } from "./app.service";
 @Controller()
@@ -14,8 +14,14 @@ export class AppController
   }
 
   @Post('/create-book')
-  create(@Body() createBookDto: CreateBookDto): Promise<void>
+  create(@Body() bookDataEntryDto: BookDataEntryDto): Promise<void>
   {
-    return firstValueFrom(this.appService.createBook(createBookDto));
+    return firstValueFrom(this.appService.createBook(bookDataEntryDto));
+  }
+
+  @Put('/update-book')
+  save(@Body() bookDataEntryDto: BookDataEntryDto): Promise<void>
+  {
+    return firstValueFrom(this.appService.saveBook(bookDataEntryDto));
   }
 }

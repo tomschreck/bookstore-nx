@@ -2,18 +2,17 @@ import { UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { BookAggregate, BookAggregateResult } from '../../../0_domain';
 import { BookDataEntryDto } from '../../../shared';
-import { CreateBookCommand } from '../../commands';
+import { SaveBookCommand } from '../../commands';
 
-
-@CommandHandler(CreateBookCommand)
-export class CreateBookCommandHandler implements ICommandHandler<CreateBookCommand>{
+@CommandHandler(SaveBookCommand)
+export class SaveBookCommandHandler implements ICommandHandler<SaveBookCommand>{
 
 
   constructor(readonly eventPublisher: EventPublisher)
   {
   }
 
-  execute(command: CreateBookCommand): Promise<void>
+  execute(command: SaveBookCommand): Promise<void>
   {
     return new Promise((resolve, reject) =>
     {
@@ -23,7 +22,7 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
       if (bookAggregateResult.isSuccess())
       {
         const bookAggregate: BookAggregate = bookAggregateResult.getValue();
-        bookAggregate.createBook();
+        bookAggregate.updateBook();
 
         // mergeObjectContext & commit PUBLISHES EVENTS FROM AGGREGATE...
         this.eventPublisher.mergeObjectContext(bookAggregate);
@@ -31,7 +30,6 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
         resolve();
         return;
       }
-
 
       if (bookAggregateResult.isFailure())
       {

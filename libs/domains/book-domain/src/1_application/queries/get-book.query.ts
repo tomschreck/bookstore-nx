@@ -1,11 +1,18 @@
+import { QueryBase } from '@bookstore-nx/ddd-core';
 
 
-export class GetBookQuery
+export class GetBookQuery extends QueryBase<string>
 {
   public id: string;
 
-  constructor(payload: string)
+  private constructor(props: string)
   {
-    this.id = payload;
+    super(props);
+    this.id = props;
+  }
+
+  static create(payload: string): GetBookQuery
+  {
+    return new GetBookQuery(payload);
   }
 }
