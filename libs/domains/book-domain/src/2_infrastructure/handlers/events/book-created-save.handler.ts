@@ -14,7 +14,6 @@ export class BookCreatedSaveEventHandler implements IEventHandler<BookCreatedEve
   async handle(event: BookCreatedEvent): Promise<void>
   {
     const bookDataEntryDto: BookDataEntryDto = event.bookDataEntryDto;
-
     await this.bookRepository.saveBook(bookDataEntryDto);
   }
 }

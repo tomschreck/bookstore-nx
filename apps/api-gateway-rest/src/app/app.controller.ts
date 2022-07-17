@@ -1,4 +1,4 @@
-import { BookDataEntryDto, BookDto } from '@bookstore-nx/domains/book-domain';
+import { AdjustInventoryDto, BookDataEntryDto, BookDto } from '@bookstore-nx/domains/book-domain';
 import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { firstValueFrom } from 'rxjs';
 import { AppService } from "./app.service";
@@ -23,5 +23,11 @@ export class AppController
   save(@Body() bookDataEntryDto: BookDataEntryDto): Promise<void>
   {
     return firstValueFrom(this.appService.saveBook(bookDataEntryDto));
+  }
+
+  @Put('/adjust-inventory')
+  adjustInventory(@Body() adjustInventoryDto: AdjustInventoryDto): Promise<void>
+  {
+    return firstValueFrom(this.appService.adjustInventory(adjustInventoryDto));
   }
 }

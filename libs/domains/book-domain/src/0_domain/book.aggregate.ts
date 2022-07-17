@@ -1,7 +1,7 @@
 import { Aggregate, Either, failure, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { BookDataEntryDto } from '../shared';
 import { Book, BookError, BookResult } from './book.entity';
-import { BookCreatedEvent, BookUpdatedEvent } from './events';
+import { BookCreatedEvent, BookUpdatedEvent, InventoryAdjustedEvent } from './events';
 
 export type BookAggregateResult = Either<
   // Success
@@ -33,11 +33,15 @@ export class BookAggregate extends Aggregate<BookDataEntryDto> {
 
   createBook()
   {
-    this.apply(BookCreatedEvent.create(this.props));
+    this.apply(BookCreatedEvent.create(this.book.props));
   }
   updateBook()
   {
-    this.apply(BookUpdatedEvent.create(this.props));
+    this.apply(BookUpdatedEvent.create(this.book.props));
+  }
+  adjustInventory()
+  {
+    this.apply(InventoryAdjustedEvent.create(this.book.props));
   }
 
 

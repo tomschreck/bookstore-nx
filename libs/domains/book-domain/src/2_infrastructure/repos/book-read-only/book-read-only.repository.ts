@@ -1,11 +1,23 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from "typeorm";
 import { BookDataEntryDto } from '../../../shared';
-import { CustomRepository } from '../database';
 import { BookReadOnlyEntity } from './book-read-only.entity';
 
 
-@CustomRepository(BookReadOnlyEntity)
-export class BookReadOnlyRepository extends Repository<BookReadOnlyEntity> {
+@Injectable()
+export class BookReadOnlyRepository
+{
+
+  constructor(
+    @InjectRepository(BookReadOnlyEntity)
+    private repository: Repository<BookReadOnlyEntity>,
+  ) { }
+
+  async findOneBy(id: string): Promise<BookReadOnlyEntity>
+  {
+    return this.repository.findOneBy({ id: id });
+  }
 
   async saveProjection(bookDataEntryDto: BookDataEntryDto): Promise<void>
   {
@@ -19,6 +31,6 @@ export class BookReadOnlyRepository extends Repository<BookReadOnlyEntity> {
     bookReadOnlyEntity.price = bookDataEntryDto.price;
     bookReadOnlyEntity.inventory = bookDataEntryDto.inventory;
 
-    await this.save(bookReadOnlyEntity);
+    await this.repository.save(bookReadOnlyEntity);
   }
 }

@@ -1,16 +1,15 @@
 import { BookDataEntryDto } from '../../shared';
 import { BookEventBase } from './book-event';
 
-
-export class BookUpdatedEvent extends BookEventBase
+export class InventoryAdjustedEvent extends BookEventBase
 {
   private constructor(props: BookDataEntryDto)
   {
     super(props);
   }
 
-  static create(props: BookDataEntryDto): BookUpdatedEvent
+  static create(props: BookDataEntryDto): InventoryAdjustedEvent
   {
-    return new BookUpdatedEvent(props);
+    return new InventoryAdjustedEvent(props);
   }
 }

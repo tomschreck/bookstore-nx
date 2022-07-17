@@ -1,29 +1,33 @@
 import { UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { BookAggregate, BookAggregateResult } from '../../../0_domain';
-import { BookDataEntryDto } from '../../../shared';
-import { SaveBookCommand } from '../../commands';
+import { AdjustInventoryDto, BookDataEntryDto } from '../../../shared';
+import { AdjustInventoryCommand } from '../../commands';
 
-@CommandHandler(SaveBookCommand)
-export class SaveBookCommandHandler implements ICommandHandler<SaveBookCommand>{
+
+@CommandHandler(AdjustInventoryCommand)
+export class AdjustInventoryCommandHandler implements ICommandHandler<AdjustInventoryCommand>{
 
   constructor(readonly eventPublisher: EventPublisher)
   {
   }
 
-  execute(command: SaveBookCommand): Promise<void>
+  execute(command: AdjustInventoryCommand): Promise<void>
   {
     return new Promise((resolve, reject) =>
     {
       const bookDataEntryDto: BookDataEntryDto = command.bookDataEntryDto;
-      const bookAggregateResult: BookAggregateResult = BookAggregate.create(bookDataEntryDto, UniqueEntityID.create(bookDataEntryDto.id));
+      const adjustInventoryDto: AdjustInventoryDto = command.adjustInventoryDto;
+      const updatedBookDataEntryDto: BookDataEntryDto = { ...bookDataEntryDto, inventory: adjustInventoryDto.inventory };
+      const bookAggregateResult: BookAggregateResult = BookAggregate.create(updatedBookDataEntryDto, UniqueEntityID.create(bookDataEntryDto.id));
 
       if (bookAggregateResult.isSuccess())
       {
         const bookAggregate: BookAggregate = bookAggregateResult.getValue();
-        bookAggregate.updateBook();
+        bookAggregate.adjustInventory();
 
         // mergeObjectContext & commit PUBLISHES EVENTS FROM AGGREGATE...
+        console.log('WTF', bookAggregate.id);
         this.eventPublisher.mergeObjectContext(bookAggregate);
         bookAggregate.commit();
         resolve();

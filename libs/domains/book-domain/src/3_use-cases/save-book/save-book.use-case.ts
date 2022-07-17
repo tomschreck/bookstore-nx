@@ -15,5 +15,4 @@ export class SaveBookUseCase implements IUseCase<BookDataEntryDto, void> {
     const command: SaveBookCommand = SaveBookCommand.create(input);
     return this.commandBus.execute(command);
   }
-
 }

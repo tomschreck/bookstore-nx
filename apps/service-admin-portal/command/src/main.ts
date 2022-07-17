@@ -4,6 +4,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from "./app.module";
 
 const logger = new Logger('SERVICE-ADMIN-PORTAL-COMMAND');
+const port = 3000;
 
 async function bootstrap()
 {
@@ -14,15 +15,15 @@ async function bootstrap()
       transport: Transport.TCP,
       options:
       {
-        port: 3000
+        port: port
       }
     }
   );
 
   await app.listen().then(() =>
   {
-    logger.log('Admin Portal Command Microservice is listening...');
     logger.log('-------------------------------------------------------------------------------------');
+    logger.log(`SERVICE | ADMIN PORTAL COMMAND Microservice is listening on port ${port}...`);
     logger.log('');
     logger.log('');
   });

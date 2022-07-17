@@ -1,10 +1,22 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from "typeorm";
 import { BookDataEntryDto } from '../../../shared';
-import { CustomRepository } from '../database';
 import { BookEntity } from './book.entity';
 
-@CustomRepository(BookEntity)
-export class BookRepository extends Repository<BookEntity> {
+@Injectable()
+export class BookRepository
+{
+
+  constructor(
+    @InjectRepository(BookEntity)
+    private repository: Repository<BookEntity>,
+  ) { }
+
+  async findOneBy(id: string): Promise<BookEntity>
+  {
+    return this.repository.findOneBy({ id: id });
+  }
 
   async saveBook(bookDataEntryDto: BookDataEntryDto): Promise<void>
   {
@@ -19,7 +31,7 @@ export class BookRepository extends Repository<BookEntity> {
     bookEntity.inventory = bookDataEntryDto.inventory;
     bookEntity.notes = bookDataEntryDto.notes;
 
-    await this.save(bookEntity);
+    await this.repository.save(bookEntity);
   }
 
 }

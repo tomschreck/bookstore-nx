@@ -42,7 +42,6 @@ export class Book extends Entity<BookDataEntryDto>
     guardList.push(Guard.againstNullOrUndefined(props.author, 'author'));
     guardList.push(Guard.againstNullOrUndefined(props.category, 'category'));
     guardList.push(Guard.isGreaterThanOrEqualTo(props.price, 0, 'price'));
-    guardList.push(Guard.isGreaterThanOrEqualTo(props.inventory, 0, 'inventory'));
 
     const isbnResult: ISBNResult = ISBN.create(props.isbn);
 

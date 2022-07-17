@@ -1,4 +1,4 @@
-import { BookDataEntryDto } from '@bookstore-nx/domains/book-domain';
+import { AdjustInventoryDto, BookDataEntryDto } from '@bookstore-nx/domains/book-domain';
 import { Inject, Injectable } from "@nestjs/common";
 import { ClientProxy } from '@nestjs/microservices';
 
@@ -24,5 +24,10 @@ export class AppService
   saveBook(bookDataEntryDto: BookDataEntryDto)
   {
     return this.clientCommands.emit({ role: 'book', cmd: 'save' }, bookDataEntryDto);
+  }
+
+  adjustInventory(adjustInventoryDto: AdjustInventoryDto)
+  {
+    return this.clientCommands.emit({ role: 'book', cmd: 'adjust-inventory' }, adjustInventoryDto);
   }
 }

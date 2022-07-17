@@ -1,14 +1,9 @@
-import { DomainEvent } from '@bookstore-nx/ddd-core';
 import { BookDataEntryDto } from '../../shared';
+import { BookEventBase } from './book-event';
 
 
-export class BookCreatedEvent extends DomainEvent<BookDataEntryDto>
+export class BookCreatedEvent extends BookEventBase
 {
-  get bookDataEntryDto(): BookDataEntryDto
-  {
-    return this.props;
-  }
-
   private constructor(props: BookDataEntryDto)
   {
     super(props);

@@ -10,8 +10,8 @@ export class GetBookQueryHandler implements IQueryHandler<GetBookQuery, BookRead
     private readonly bookReadOnlyRepository: BookReadOnlyRepository,
   ) { }
 
-  execute(query: GetBookQuery): Promise<BookReadOnlyEntity>
+  async execute(query: GetBookQuery): Promise<BookReadOnlyEntity>
   {
-    return this.bookReadOnlyRepository.findOneBy({ id: query.id });
+    return this.bookReadOnlyRepository.findOneBy(query.id);
   }
 }
