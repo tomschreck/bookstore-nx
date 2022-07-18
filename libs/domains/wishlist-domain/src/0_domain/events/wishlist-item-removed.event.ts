@@ -2,15 +2,15 @@ import { WishlistDto } from '../../shared';
 import { WishlistEventBase } from './wishlist-event-base';
 
 
-export class WishlistUpdatedEvent extends WishlistEventBase
+export class WishlistItemRemovedEvent extends WishlistEventBase
 {
   private constructor(props: WishlistDto)
   {
     super(props);
   }
 
-  static create(props: WishlistDto): WishlistUpdatedEvent
+  static create(props: WishlistDto): WishlistItemRemovedEvent
   {
-    return new WishlistUpdatedEvent(props);
+    return new WishlistItemRemovedEvent(props);
   }
 }

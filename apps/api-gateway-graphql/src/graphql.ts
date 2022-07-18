@@ -84,9 +84,8 @@ export interface IMutation {
     updateBook(updateBookInput: UpdateBookInput): Nullable<Void> | Promise<Nullable<Void>>;
     adjustInventory(adjustInventoryInput: AdjustInventoryInput): Nullable<Void> | Promise<Nullable<Void>>;
     removeBook(id: string): Nullable<Void> | Promise<Nullable<Void>>;
-    createWishlist(createWishlistInput: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
-    updateWishlist(updateWishlistInput: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
-    removeWishlist(removeWishlistInut: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
+    createWishlist(input: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
+    removeWishlist(input: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
     clearWishlist(userId: string): Nullable<Void> | Promise<Nullable<Void>>;
 }
 

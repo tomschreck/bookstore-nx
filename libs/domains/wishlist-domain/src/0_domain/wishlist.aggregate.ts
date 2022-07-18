@@ -1,7 +1,7 @@
 import { Aggregate, DomainError, Either, failure, Guard, IGuardResult, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { CONFIG } from '../domain.config';
 import { WishlistDto } from '../shared';
-import { WishlistCreatedEvent } from './events';
+import { WishlistCreatedEvent, WishlistItemRemovedEvent } from './events';
 
 
 export type WishlistAggregateResult = Either<
@@ -31,10 +31,11 @@ export class WishlistAggregate extends Aggregate<WishlistDto> {
   {
     this.apply(WishlistCreatedEvent.create(this.props));
   }
-  // updateWishlist()
-  // {
-  //   this.apply(WishlistUpdatedEvent.create(this.props));
-  // }
+
+  removeWishlistItem()
+  {
+    this.apply(WishlistItemRemovedEvent.create(this.props));
+  }
 
 
   static create(props: WishlistDto, id?: UniqueEntityID): WishlistAggregateResult

@@ -20,8 +20,7 @@ type Query {
 }
 
 type Mutation {
-  createWishlist(createWishlistInput: WishlistInput!): Void
-  updateWishlist(updateWishlistInput: WishlistInput!): Void
-  removeWishlist(removeWishlistInut: WishlistInput!): Void
+  createWishlist(input: WishlistInput!): Void
+  removeWishlist(input: WishlistInput!): Void
   clearWishlist(userId: ID!): Void
 }

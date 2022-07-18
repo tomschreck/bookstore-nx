@@ -16,21 +16,15 @@ export class WishlistResolver
 
 
   @Mutation('createWishlist')
-  create(@Args('createWishlistInput') wishlistInput: WishlistDataEntryDto)
+  create(@Args('input') input: WishlistDataEntryDto)
   {
-    return this.wishlistService.create(wishlistInput);
-  }
-
-  @Mutation('updateWishlist')
-  update(@Args('updateWishlistInput') wishlistInput: WishlistDataEntryDto)
-  {
-    return this.wishlistService.update(wishlistInput);
+    return this.wishlistService.create(input);
   }
 
   @Mutation('removeWishlist')
-  remove(@Args('updateWishlistInput') wishlistInput: WishlistDataEntryDto)
+  remove(@Args('input') input: WishlistDataEntryDto)
   {
-    return this.wishlistService.remove(wishlistInput);
+    return this.wishlistService.remove(input);
   }
 
   @Mutation('clearWishlist')

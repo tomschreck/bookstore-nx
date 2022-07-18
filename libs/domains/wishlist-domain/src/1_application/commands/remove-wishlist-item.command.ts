@@ -2,7 +2,7 @@ import { CommandBase } from '@bookstore-nx/ddd-core';
 import { WishlistDataEntryDto, WishlistDto } from '../../shared';
 
 
-export class CreateWishlistCommand extends CommandBase<WishlistDataEntryDto>
+export class RemoveWishlistItemCommand extends CommandBase<WishlistDataEntryDto>
 {
   private _existingWishlistDto: WishlistDto;
 
@@ -22,8 +22,8 @@ export class CreateWishlistCommand extends CommandBase<WishlistDataEntryDto>
     this._existingWishlistDto = existingWishlistDto;
   }
 
-  static create(props: WishlistDataEntryDto, existingWishlistDto: WishlistDto): CreateWishlistCommand
+  static create(props: WishlistDataEntryDto, existingWishlistDto: WishlistDto): RemoveWishlistItemCommand
   {
-    return new CreateWishlistCommand(props, existingWishlistDto);
+    return new RemoveWishlistItemCommand(props, existingWishlistDto);
   }
 }

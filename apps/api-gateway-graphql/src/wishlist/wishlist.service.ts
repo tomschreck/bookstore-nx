@@ -10,29 +10,21 @@ export class WishlistService
     @Inject('SERVICE_WISHLIST_QUERIES') private readonly clientQueries: ClientProxy
   ) { }
 
-  create(wishlistInput: WishlistDataEntryDto)
-  {
-    return this.clientCommands.emit({ role: 'wishlist', cmd: 'create' }, wishlistInput);
-  }
-
-  findAll()
-  {
-    return `This action returns all wishlist`;
-  }
-
   findOne(id: string)
   {
     return `This action returns a #${id} wishlist`;
   }
 
-  update(wishlistInput: WishlistDataEntryDto)
+
+
+  create(wishlistInput: WishlistDataEntryDto)
   {
-    return `This action updates a wishlist`;
+    return this.clientCommands.emit({ role: 'wishlist', cmd: 'create' }, wishlistInput);
   }
 
   remove(wishlistInput: WishlistDataEntryDto)
   {
-    return `This action removes an item from wishlist`;
+    return this.clientCommands.emit({ role: 'wishlist', cmd: 'remove' }, wishlistInput);
   }
 
   clear(userId: string)
