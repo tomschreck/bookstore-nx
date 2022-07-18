@@ -1,5 +1,5 @@
+import { WishlistDataEntryDto } from '@bookstore-nx/domains/wishlist-domain';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { WishlistInput } from './dto';
 import { WishlistService } from './wishlist.service';
 
 @Resolver('Wishlist')
@@ -16,19 +16,19 @@ export class WishlistResolver
 
 
   @Mutation('createWishlist')
-  create(@Args('createWishlistInput') wishlistInput: WishlistInput)
+  create(@Args('createWishlistInput') wishlistInput: WishlistDataEntryDto)
   {
     return this.wishlistService.create(wishlistInput);
   }
 
   @Mutation('updateWishlist')
-  update(@Args('updateWishlistInput') wishlistInput: WishlistInput)
+  update(@Args('updateWishlistInput') wishlistInput: WishlistDataEntryDto)
   {
     return this.wishlistService.update(wishlistInput);
   }
 
   @Mutation('removeWishlist')
-  remove(@Args('updateWishlistInput') wishlistInput: WishlistInput)
+  remove(@Args('updateWishlistInput') wishlistInput: WishlistDataEntryDto)
   {
     return this.wishlistService.remove(wishlistInput);
   }

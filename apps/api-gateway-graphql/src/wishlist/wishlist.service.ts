@@ -1,6 +1,6 @@
+import { WishlistDataEntryDto } from '@bookstore-nx/domains/wishlist-domain';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { WishlistInput } from './dto';
 
 @Injectable()
 export class WishlistService
@@ -10,7 +10,7 @@ export class WishlistService
     @Inject('SERVICE_WISHLIST_QUERIES') private readonly clientQueries: ClientProxy
   ) { }
 
-  create(wishlistInput: WishlistInput)
+  create(wishlistInput: WishlistDataEntryDto)
   {
     return this.clientCommands.emit({ role: 'wishlist', cmd: 'create' }, wishlistInput);
   }
@@ -25,12 +25,12 @@ export class WishlistService
     return `This action returns a #${id} wishlist`;
   }
 
-  update(wishlistInput: WishlistInput)
+  update(wishlistInput: WishlistDataEntryDto)
   {
     return `This action updates a wishlist`;
   }
 
-  remove(wishlistInput: WishlistInput)
+  remove(wishlistInput: WishlistDataEntryDto)
   {
     return `This action removes an item from wishlist`;
   }
