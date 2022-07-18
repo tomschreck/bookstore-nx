@@ -6,6 +6,7 @@
     "api-gateway-rest": "apps/api-gateway-rest",
     "ddd-core": "libs/ddd-core",
     "domains-book-domain": "libs/domains/book-domain",
+    "domains-wishlist-domain": "libs/domains/wishlist-domain",
     "service-admin-portal-command": "apps/service-admin-portal/command",
     "service-admin-portal-query": "apps/service-admin-portal/query",
     "service-order-command": "apps/service-order/command",

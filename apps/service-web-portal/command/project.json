@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/service-web-portal/command",
         "main": "apps/service-web-portal/command/src/main.ts",
@@ -34,14 +36,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/service-web-portal/command/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/service-web-portal/command/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/service-web-portal/command"],
+      "outputs": [
+        "coverage/apps/service-web-portal/command"
+      ],
       "options": {
         "jestConfig": "apps/service-web-portal/command/jest.config.ts",
         "passWithNoTests": true

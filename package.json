@@ -6,7 +6,7 @@
       "start": "nx serve",
       "build": "nx build",
       "test": "nx test",
-      "start:api-graphql": "nx run-many --target=serve --all --exclude=api-gateway-rest",
+      "start:api-graphql": "nx run-many --parallel --target=serve --all --exclude=api-gateway-rest",
       "start:api-rest": "nx run-many --target=serve --all --exclude=api-gateway-graphql"
    },
    "private": true,

@@ -1,7 +1,8 @@
 import { Module } from "@nestjs/common";
+import { CreateWishlistModule } from './create-wishlist';
 
 @Module({
-  imports: [],
+  imports: [ CreateWishlistModule ],
   controllers: [],
   providers: [],
 })

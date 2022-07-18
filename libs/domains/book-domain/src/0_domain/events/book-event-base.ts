@@ -11,6 +11,5 @@ export class BookEventBase extends DomainEvent<BookDataEntryDto>
   constructor(props: BookDataEntryDto)
   {
     super(props);
-
   }
 }

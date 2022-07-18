@@ -17,7 +17,7 @@ export class SaveBookCommandHandler implements ICommandHandler<SaveBookCommand>{
     {
       const updatedBookDataEntryDto: BookDataEntryDto = command.updatedBookDataEntryDto;
       const existingBookDataEntryDto: BookDataEntryDto = command.existingBookDataEntryDto;
-      const mergedBookDataEntryDto = { ...existingBookDataEntryDto, ...updatedBookDataEntryDto };
+      const mergedBookDataEntryDto: BookDataEntryDto = { ...existingBookDataEntryDto, ...updatedBookDataEntryDto };
       const bookAggregateResult: BookAggregateResult = BookAggregate.create(mergedBookDataEntryDto, UniqueEntityID.create(updatedBookDataEntryDto.id));
 
       if (bookAggregateResult.isSuccess())

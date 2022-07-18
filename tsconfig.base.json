@@ -23,6 +23,9 @@
       ],
       "@bookstore-nx/domains/book-domain": [
         "libs/domains/book-domain/src/index.ts"
+      ],
+      "@bookstore-nx/domains/wishlist-domain": [
+        "libs/domains/wishlist-domain/src/index.ts"
       ]
     }
   },

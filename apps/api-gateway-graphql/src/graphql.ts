@@ -43,6 +43,11 @@ export interface AdjustInventoryInput {
     inventory?: Nullable<number>;
 }
 
+export interface WishlistInput {
+    userId: string;
+    bookId: string;
+}
+
 export interface Book {
     id: string;
     title: string;
@@ -71,6 +76,7 @@ export interface IQuery {
     book(id: string): Nullable<Book> | Promise<Nullable<Book>>;
     bookForWeb(id: string): Nullable<BookForWeb> | Promise<Nullable<BookForWeb>>;
     searchBooksForWeb(search?: Nullable<Search>): Nullable<Nullable<Book>[]> | Promise<Nullable<Nullable<Book>[]>>;
+    wishlist(userId: string): Nullable<Wishlist> | Promise<Nullable<Wishlist>>;
 }
 
 export interface IMutation {
@@ -78,6 +84,19 @@ export interface IMutation {
     updateBook(updateBookInput: UpdateBookInput): Nullable<Void> | Promise<Nullable<Void>>;
     adjustInventory(adjustInventoryInput: AdjustInventoryInput): Nullable<Void> | Promise<Nullable<Void>>;
     removeBook(id: string): Nullable<Void> | Promise<Nullable<Void>>;
+    createWishlist(createWishlistInput: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
+    updateWishlist(updateWishlistInput: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
+    removeWishlist(removeWishlistInut: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
+    clearWishlist(userId: string): Nullable<Void> | Promise<Nullable<Void>>;
+}
+
+export interface Wishlist {
+    userId: string;
+    collection?: Nullable<Nullable<WishlistItem>[]>;
+}
+
+export interface WishlistItem {
+    bookId: string;
 }
 
 export type Void = any;

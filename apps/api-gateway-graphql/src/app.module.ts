@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { BookModule } from './book/book.module';
 import { upperDirectiveTransformer } from './common/directives';
+import { WishlistModule } from './wishlist/wishlist.module';
 
 
 @Module({
@@ -18,7 +19,8 @@ import { upperDirectiveTransformer } from './common/directives';
       },
       playground: true
     }),
-    BookModule
+    BookModule,
+    WishlistModule
   ]
 })
 export class AppModule { }

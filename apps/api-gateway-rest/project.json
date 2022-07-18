@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/api-gateway-rest",
         "main": "apps/api-gateway-rest/src/main.ts",
@@ -34,14 +36,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/api-gateway-rest/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/api-gateway-rest/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/api-gateway-rest"],
+      "outputs": [
+        "coverage/apps/api-gateway-rest"
+      ],
       "options": {
         "jestConfig": "apps/api-gateway-rest/jest.config.ts",
         "passWithNoTests": true

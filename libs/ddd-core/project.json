@@ -5,14 +5,20 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/ddd-core/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/ddd-core/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/ddd-core"],
+      "outputs": [
+        "coverage/libs/ddd-core"
+      ],
       "options": {
         "jestConfig": "libs/ddd-core/jest.config.ts",
         "passWithNoTests": true

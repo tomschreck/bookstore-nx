@@ -4,7 +4,12 @@ import { AdjustInventoryCommandHandler, CreateBookCommandHandler, SaveBookComman
 
 @Module({
   imports: [ CqrsModule ],
-  providers: [ CreateBookCommandHandler, SaveBookCommandHandler, AdjustInventoryCommandHandler ],
+  providers:
+    [
+      CreateBookCommandHandler,
+      SaveBookCommandHandler,
+      AdjustInventoryCommandHandler
+    ],
   exports: []
 })
 export class ApplicationModule { }

@@ -1,0 +1,27 @@
+scalar Void
+
+type Wishlist {
+  userId: ID!
+  collection: [WishlistItem]
+}
+type WishlistItem {
+  bookId: ID!
+}
+
+
+input WishlistInput {
+  userId: ID!
+  bookId: ID!
+}
+
+
+type Query {
+  wishlist(userId: ID!): Wishlist
+}
+
+type Mutation {
+  createWishlist(createWishlistInput: WishlistInput!): Void
+  updateWishlist(updateWishlistInput: WishlistInput!): Void
+  removeWishlist(removeWishlistInut: WishlistInput!): Void
+  clearWishlist(userId: ID!): Void
+}
