@@ -15,8 +15,10 @@ export class SaveBookCommandHandler implements ICommandHandler<SaveBookCommand>{
   {
     return new Promise((resolve, reject) =>
     {
-      const bookDataEntryDto: BookDataEntryDto = command.bookDataEntryDto;
-      const bookAggregateResult: BookAggregateResult = BookAggregate.create(bookDataEntryDto, UniqueEntityID.create(bookDataEntryDto.id));
+      const updatedBookDataEntryDto: BookDataEntryDto = command.updatedBookDataEntryDto;
+      const existingBookDataEntryDto: BookDataEntryDto = command.existingBookDataEntryDto;
+      const mergedBookDataEntryDto = { ...existingBookDataEntryDto, ...updatedBookDataEntryDto };
+      const bookAggregateResult: BookAggregateResult = BookAggregate.create(mergedBookDataEntryDto, UniqueEntityID.create(updatedBookDataEntryDto.id));
 
       if (bookAggregateResult.isSuccess())
       {

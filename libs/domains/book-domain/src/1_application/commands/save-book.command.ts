@@ -3,18 +3,26 @@ import { BookDataEntryDto } from '../../shared';
 
 
 export class SaveBookCommand extends CommandBase<BookDataEntryDto> {
-  get bookDataEntryDto(): BookDataEntryDto
+  private _existingBookDataEntryDto: BookDataEntryDto;
+
+  get updatedBookDataEntryDto(): BookDataEntryDto
   {
     return this.props;
   }
 
-  private constructor(props: BookDataEntryDto)
+  get existingBookDataEntryDto(): BookDataEntryDto
   {
-    super(props);
+    return this._existingBookDataEntryDto;
   }
 
-  static create(props: BookDataEntryDto): SaveBookCommand
+  private constructor(props: BookDataEntryDto, existingBookDataEntryDto: BookDataEntryDto)
   {
-    return new SaveBookCommand(props);
+    super(props);
+    this._existingBookDataEntryDto = existingBookDataEntryDto;
+  }
+
+  static create(props: BookDataEntryDto, existingBookDataEntryDto: BookDataEntryDto): SaveBookCommand
+  {
+    return new SaveBookCommand(props, existingBookDataEntryDto);
   }
 }

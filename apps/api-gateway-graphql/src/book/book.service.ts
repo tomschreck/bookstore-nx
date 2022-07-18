@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { AdjustInventoryInput, BookInput } from './dto';
+import { AdjustInventoryInput, CreateBookInput, UpdateBookInput } from './dto';
 
 @Injectable()
 export class BookService
@@ -10,7 +10,7 @@ export class BookService
     @Inject('SERVICE_ADMIN_PORTAL_QUERIES') private readonly clientQueries: ClientProxy
   ) { }
 
-  create(bookInput: BookInput)
+  create(bookInput: CreateBookInput)
   {
     return this.clientCommands.emit({ role: 'book', cmd: 'create' }, bookInput);
   }
@@ -26,7 +26,7 @@ export class BookService
     return this.clientQueries.send({ role: 'book', cmd: 'get' }, id);
   }
 
-  update(bookInput: BookInput)
+  update(bookInput: UpdateBookInput)
   {
     return this.clientCommands.emit({ role: 'book', cmd: 'save' }, bookInput);
   }

@@ -23,11 +23,23 @@ type BookForWeb {
   inventory: Int
 }
 
-input BookInput {
+input CreateBookInput {
   id: ID!
   title: String!
   author: String!
   isbn: String!
+  category: String
+  status: String
+  price: Float
+  inventory: Int
+  notes: String
+}
+
+input UpdateBookInput {
+  id: ID!
+  title: String
+  author: String
+  isbn: String
   category: String
   status: String
   price: Float
@@ -55,8 +67,8 @@ type Query {
 }
 
 type Mutation {
-  createBook(createBookInput: BookInput!): Void
-  updateBook(updateBookInput: BookInput!): Void
+  createBook(createBookInput: CreateBookInput!): Void
+  updateBook(updateBookInput: UpdateBookInput!): Void
   adjustInventory(adjustInventoryInput: AdjustInventoryInput!): Void
   removeBook(id: ID!): Void
 }
