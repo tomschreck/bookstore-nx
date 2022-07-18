@@ -1,12 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import
-{
-  BookCreatedSaveEventHandler,
-  BookCreatedSaveProjectionEventHandler
-} from "./handlers";
-import { BookUpdatedSaveProjectionEventHandler } from './handlers/events/book-updated-save-projection.handler';
-import { BookUpdatedSaveEventHandler } from './handlers/events/book-updated-save.handler';
+import { BookSaveEventHandler, BookSaveProjectionEventHandler } from "./handlers";
 import
 {
   BookEntity,
@@ -27,10 +21,8 @@ import
     [
       BookRepository,
       BookReadOnlyRepository,
-      BookCreatedSaveEventHandler,
-      BookCreatedSaveProjectionEventHandler,
-      BookUpdatedSaveEventHandler,
-      BookUpdatedSaveProjectionEventHandler
+      BookSaveEventHandler,
+      BookSaveProjectionEventHandler
     ],
   exports:
     [

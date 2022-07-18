@@ -1,11 +1,11 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { BookCreatedEvent, BookEventBase } from '../../../0_domain';
+import { BookCreatedEvent, BookEventBase, BookUpdatedEvent, InventoryAdjustedEvent } from '../../../0_domain';
 import { BookDataEntryDto } from '../../../shared';
 import { BookReadOnlyRepository } from '../../repos';
 
 
-@EventsHandler(BookCreatedEvent)
-export class BookCreatedSaveProjectionEventHandler implements IEventHandler
+@EventsHandler(BookCreatedEvent, BookUpdatedEvent, InventoryAdjustedEvent)
+export class BookSaveProjectionEventHandler implements IEventHandler
 {
 
   constructor(

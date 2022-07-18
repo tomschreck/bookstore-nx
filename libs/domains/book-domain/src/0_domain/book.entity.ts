@@ -53,7 +53,7 @@ export class Book extends Entity<BookDataEntryDto>
     const guardResult = Guard.combine(guardList);
     if (!guardResult.succeeded) return failure(new BookError(guardResult.message));
 
-    const book = new Book(props, isbnResult.getValue(), id);
+    const book = new Book({ ...props, id: props.id || id.toString() }, isbnResult.getValue(), id);
 
     return success(book);
   }
