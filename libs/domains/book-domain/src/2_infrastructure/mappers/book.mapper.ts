@@ -1,14 +1,10 @@
-import { IMapper } from '@bookstore-nx/ddd-core';
 import { BookDataEntryDto } from '../../shared';
 import { BookEntity } from '../repos';
 
 
-export class BookMapper implements IMapper<BookEntity, BookDataEntryDto>
+export class BookMapper
 {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private constructor() { }
-
-  toDTO(input: BookEntity): BookDataEntryDto
+  static toDTO(input: BookEntity): BookDataEntryDto
   {
     const bookDataEntryDto: BookDataEntryDto = {
       id: input.id,
@@ -25,7 +21,7 @@ export class BookMapper implements IMapper<BookEntity, BookDataEntryDto>
     return bookDataEntryDto;
   }
 
-  toDomain(input: BookDataEntryDto): BookEntity
+  static toDomain(input: BookDataEntryDto): BookEntity
   {
     const bookEntity: BookEntity = new BookEntity();
     bookEntity.id = input.id;
@@ -40,10 +36,4 @@ export class BookMapper implements IMapper<BookEntity, BookDataEntryDto>
 
     return bookEntity;
   }
-
-  public static create(): BookMapper
-  {
-    return new BookMapper();
-  }
-
 }

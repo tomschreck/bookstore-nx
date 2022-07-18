@@ -3,8 +3,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import
 {
   BookCreatedSaveEventHandler,
-  BookCreatedSaveProjectionEventHandler,
-  GetBookQueryHandler
+  BookCreatedSaveProjectionEventHandler
 } from "./handlers";
 import { BookUpdatedSaveProjectionEventHandler } from './handlers/events/book-updated-save-projection.handler';
 import { BookUpdatedSaveEventHandler } from './handlers/events/book-updated-save.handler';
@@ -31,8 +30,7 @@ import
       BookCreatedSaveEventHandler,
       BookCreatedSaveProjectionEventHandler,
       BookUpdatedSaveEventHandler,
-      BookUpdatedSaveProjectionEventHandler,
-      GetBookQueryHandler,
+      BookUpdatedSaveProjectionEventHandler
     ],
   exports:
     [

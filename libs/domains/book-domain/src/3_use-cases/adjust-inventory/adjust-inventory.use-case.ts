@@ -17,7 +17,7 @@ export class AdjustInventoryUseCase implements IUseCase<AdjustInventoryDto, void
   async executeAsync(input: AdjustInventoryDto): Promise<void>
   {
     const bookEntity: BookEntity = await this.bookRepository.findOneBy(input.id);
-    const bookDataEntryDto: BookDataEntryDto = BookMapper.create().toDTO(bookEntity);
+    const bookDataEntryDto: BookDataEntryDto = BookMapper.toDTO(bookEntity);
     const command: AdjustInventoryCommand = AdjustInventoryCommand.create(input, bookDataEntryDto);
 
     return this.commandBus.execute(command);
