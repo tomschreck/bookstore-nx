@@ -10,19 +10,14 @@
         "outputPath": "dist/apps/service-whishlist/query",
         "main": "apps/service-whishlist/query/src/main.ts",
         "tsConfig": "apps/service-whishlist/query/tsconfig.app.json",
-        "assets": ["apps/service-whishlist/query/src/assets"]
+        "assets": []
       },
       "configurations": {
         "production": {
           "optimization": true,
           "extractLicenses": true,
           "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/service-whishlist/query/src/environments/environment.ts",
-              "with": "apps/service-whishlist/query/src/environments/environment.prod.ts"
-            }
-          ]
+          "fileReplacements": []
         }
       }
     },

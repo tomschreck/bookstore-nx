@@ -10,19 +10,14 @@
         "outputPath": "dist/apps/service-order/command",
         "main": "apps/service-order/command/src/main.ts",
         "tsConfig": "apps/service-order/command/tsconfig.app.json",
-        "assets": ["apps/service-order/command/src/assets"]
+        "assets": []
       },
       "configurations": {
         "production": {
           "optimization": true,
           "extractLicenses": true,
           "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/service-order/command/src/environments/environment.ts",
-              "with": "apps/service-order/command/src/environments/environment.prod.ts"
-            }
-          ]
+          "fileReplacements": []
         }
       }
     },

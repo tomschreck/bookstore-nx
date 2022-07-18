@@ -1,15 +1,17 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/api-gateway-rest/src",
+  "sourceRoot": "apps/api-gateway-graphql/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "outputPath": "dist/apps/api-gateway-rest",
-        "main": "apps/api-gateway-rest/src/main.ts",
-        "tsConfig": "apps/api-gateway-rest/tsconfig.app.json",
+        "outputPath": "dist/apps/api-gateway-graphql",
+        "main": "apps/api-gateway-graphql/src/main.ts",
+        "tsConfig": "apps/api-gateway-graphql/tsconfig.app.json",
         "assets": []
       },
       "configurations": {
@@ -24,26 +26,32 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "api-gateway-rest:build"
+        "buildTarget": "api-gateway-graphql:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "api-gateway-rest:build:production"
+          "buildTarget": "api-gateway-graphql:build:production"
         }
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/api-gateway-rest/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/api-gateway-graphql/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/api-gateway-rest"],
+      "outputs": [
+        "coverage/apps/api-gateway-graphql"
+      ],
       "options": {
-        "jestConfig": "apps/api-gateway-rest/jest.config.ts",
+        "jestConfig": "apps/api-gateway-graphql/jest.config.ts",
         "passWithNoTests": true
       }
     }
