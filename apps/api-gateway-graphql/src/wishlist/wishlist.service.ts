@@ -12,7 +12,7 @@ export class WishlistService
 
   findOne(id: string)
   {
-    return this.clientQueries.emit({ role: 'wishlist', cmd: 'get-one' }, id);
+    return this.clientQueries.send({ role: 'wishlist', cmd: 'get-one' }, id);
   }
 
 

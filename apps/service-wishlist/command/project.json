@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/service-whishlist/command/src",
+  "sourceRoot": "apps/service-wishlist/command/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,9 +9,9 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/apps/service-whishlist/command",
-        "main": "apps/service-whishlist/command/src/main.ts",
-        "tsConfig": "apps/service-whishlist/command/tsconfig.app.json",
+        "outputPath": "dist/apps/service-wishlist/command",
+        "main": "apps/service-wishlist/command/src/main.ts",
+        "tsConfig": "apps/service-wishlist/command/tsconfig.app.json",
         "assets": []
       },
       "configurations": {
@@ -26,11 +26,11 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "service-whishlist-command:build"
+        "buildTarget": "service-wishlist-command:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "service-whishlist-command:build:production"
+          "buildTarget": "service-wishlist-command:build:production"
         }
       }
     },
@@ -41,17 +41,17 @@
       ],
       "options": {
         "lintFilePatterns": [
-          "apps/service-whishlist/command/**/*.ts"
+          "apps/service-wishlist/command/**/*.ts"
         ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/apps/service-whishlist/command"
+        "coverage/apps/service-wishlist/command"
       ],
       "options": {
-        "jestConfig": "apps/service-whishlist/command/jest.config.ts",
+        "jestConfig": "apps/service-wishlist/command/jest.config.ts",
         "passWithNoTests": true
       }
     }

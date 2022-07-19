@@ -91,11 +91,7 @@ export interface IMutation {
 
 export interface Wishlist {
     userId: string;
-    collection?: Nullable<Nullable<WishlistItem>[]>;
-}
-
-export interface WishlistItem {
-    bookId: string;
+    bookList?: Nullable<string[]>;
 }
 
 export type Void = any;

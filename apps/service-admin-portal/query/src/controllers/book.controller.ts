@@ -15,6 +15,6 @@ export class BookController
   @MessagePattern({ role: 'book', cmd: 'get-one' })
   async createBook(id: string): Promise<BookDto>
   {
-    return await this.getBookUseCase.executeAsync(id);
+    return this.getBookUseCase.executeAsync(id);
   }
 }

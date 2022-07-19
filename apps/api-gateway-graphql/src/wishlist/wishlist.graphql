@@ -2,12 +2,8 @@ scalar Void
 
 type Wishlist {
   userId: ID!
-  collection: [WishlistItem]
+  bookList: [ID!]
 }
-type WishlistItem {
-  bookId: ID!
-}
-
 
 input WishlistInput {
   userId: ID!

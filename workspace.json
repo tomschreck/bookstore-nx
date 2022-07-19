@@ -13,7 +13,7 @@
     "service-order-query": "apps/service-order/query",
     "service-web-portal-command": "apps/service-web-portal/command",
     "service-web-portal-query": "apps/service-web-portal/query",
-    "service-whishlist-command": "apps/service-whishlist/command",
-    "service-whishlist-query": "apps/service-whishlist/query"
+    "service-wishlist-command": "apps/service-wishlist/command",
+    "service-wishlist-query": "apps/service-wishlist/query"
   }
 }

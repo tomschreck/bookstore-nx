@@ -1,7 +1,7 @@
 import { IUseCase } from '@bookstore-nx/ddd-core';
 import { Injectable } from "@nestjs/common";
-import { BookReadOnlyEntity, BookReadOnlyRepository } from '../../2_infrastructure';
-import { BookDto } from '../../shared';
+import { BookReadOnlyEntity, BookReadOnlyRepository } from '../2_infrastructure';
+import { BookDto } from '../shared';
 
 
 @Injectable()

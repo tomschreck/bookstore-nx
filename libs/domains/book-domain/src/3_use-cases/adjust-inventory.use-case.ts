@@ -1,9 +1,9 @@
 import { IUseCase } from '@bookstore-nx/ddd-core';
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { AdjustInventoryCommand } from '../../1_application';
-import { BookEntity, BookMapper, BookRepository } from '../../2_infrastructure';
-import { AdjustInventoryDto, BookDataEntryDto } from '../../shared';
+import { AdjustInventoryCommand } from '../1_application';
+import { BookEntity, BookMapper, BookRepository } from '../2_infrastructure';
+import { AdjustInventoryDto, BookDataEntryDto } from '../shared';
 
 @Injectable()
 export class AdjustInventoryUseCase implements IUseCase<AdjustInventoryDto, void> {

@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: "service-whishlist-query",
+  displayName: "service-wishlist-command",
   preset: "../../../jest.preset.js",
   globals: {
     "ts-jest": {
@@ -11,6 +11,6 @@ export default {
   transform: {
     "^.+\\.[tj]s$": "ts-jest",
   },
-  moduleFileExtensions: ["ts", "js", "html"],
-  coverageDirectory: "../../../coverage/apps/service-whishlist/query",
+  moduleFileExtensions: [ "ts", "js", "html" ],
+  coverageDirectory: "../../../coverage/apps/service-wishlist/command",
 };

@@ -1,8 +1,8 @@
 import { IUseCase } from '@bookstore-nx/ddd-core';
 import { Injectable } from "@nestjs/common";
 import { CommandBus } from '@nestjs/cqrs';
-import { CreateBookCommand } from '../../1_application';
-import { BookDataEntryDto } from '../../shared';
+import { CreateBookCommand } from '../1_application';
+import { BookDataEntryDto } from '../shared';
 
 
 @Injectable()
