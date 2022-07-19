@@ -30,6 +30,5 @@
         "^build"
       ]
     }
-  },
-  "defaultProject": "service-order-command"
+  }
 }

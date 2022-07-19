@@ -9,8 +9,6 @@
     "domains-wishlist-domain": "libs/domains/wishlist-domain",
     "service-admin-portal-command": "apps/service-admin-portal/command",
     "service-admin-portal-query": "apps/service-admin-portal/query",
-    "service-order-command": "apps/service-order/command",
-    "service-order-query": "apps/service-order/query",
     "service-web-portal-command": "apps/service-web-portal/command",
     "service-web-portal-query": "apps/service-web-portal/query",
     "service-wishlist-command": "apps/service-wishlist/command",
