@@ -21,7 +21,7 @@ import { UseCasesModule } from './3_use-cases';
           password: configService.get("POSTGRES_PASSWORD"),
           synchronize: true,
           autoLoadEntities: true,
-          entities: [],
+          entities: [ "dist/**/*.entity{ .ts,.js}" ]
         }),
       }),
       CqrsModule,

@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApplicationModule } from './1_application';
-import { BookEntity, BookReadOnlyEntity, InfrastructureModule } from "./2_infrastructure";
+import { InfrastructureModule } from "./2_infrastructure";
 import { UseCasesModule } from './3_use-cases';
 
 @Module({
@@ -21,7 +21,7 @@ import { UseCasesModule } from './3_use-cases';
           password: configService.get("POSTGRES_PASSWORD"),
           synchronize: true,
           autoLoadEntities: true,
-          entities: [ BookEntity, BookReadOnlyEntity ],
+          entities: [ "dist/**/*.entity{ .ts,.js}" ]
         }),
       }),
       CqrsModule,
