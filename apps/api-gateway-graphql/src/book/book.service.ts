@@ -10,11 +10,6 @@ export class BookService
     @Inject('SERVICE_ADMIN_PORTAL_QUERIES') private readonly clientQueries: ClientProxy
   ) { }
 
-  create(bookInput: CreateBookInput)
-  {
-    return this.clientCommands.emit({ role: 'book', cmd: 'create' }, bookInput);
-  }
-
   findAll()
   {
     return `This action returns all book`;
@@ -22,8 +17,13 @@ export class BookService
 
   findOne(id: string)
   {
-    console.log('FIND ONE', id);
-    return this.clientQueries.send({ role: 'book', cmd: 'get' }, id);
+    return this.clientQueries.send({ role: 'book', cmd: 'get-one' }, id);
+  }
+
+
+  create(bookInput: CreateBookInput)
+  {
+    return this.clientCommands.emit({ role: 'book', cmd: 'create' }, bookInput);
   }
 
   update(bookInput: UpdateBookInput)

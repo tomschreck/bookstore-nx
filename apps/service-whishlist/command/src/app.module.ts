@@ -1,14 +1,10 @@
+import { WishlistDomainModule } from '@bookstore-nx/domains/wishlist-domain';
 import { Module } from "@nestjs/common";
-import { CreateWishlistModule } from './create-wishlist';
-import { RemoveWishlistModule } from './remove-wishlist-item';
+import { WishlistController } from './controllers';
 
 @Module({
-  imports:
-    [
-      CreateWishlistModule,
-      RemoveWishlistModule
-    ],
-  controllers: [],
+  imports: [ WishlistDomainModule ],
+  controllers: [ WishlistController ],
   providers: [],
 })
 export class AppModule { }

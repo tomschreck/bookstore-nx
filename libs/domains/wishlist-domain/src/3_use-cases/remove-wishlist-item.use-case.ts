@@ -1,9 +1,9 @@
 import { IUseCase } from '@bookstore-nx/ddd-core';
 import { Injectable } from "@nestjs/common";
 import { CommandBus } from '@nestjs/cqrs';
-import { RemoveWishlistItemCommand } from '../../1_application';
-import { WishlistEntity, WishlistMapper, WishlistRepository } from '../../2_infrastructure';
-import { WishlistDataEntryDto, WishlistDto } from '../../shared';
+import { RemoveWishlistItemCommand } from '../1_application';
+import { WishlistEntity, WishlistMapper, WishlistRepository } from '../2_infrastructure';
+import { WishlistDataEntryDto, WishlistDto } from '../shared';
 
 
 @Injectable()

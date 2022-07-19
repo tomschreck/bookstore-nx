@@ -13,7 +13,7 @@ export class AppService
 
   getData(id: string)
   {
-    return this.clientQueries.send({ role: 'book', cmd: 'get' }, id);
+    return this.clientQueries.send({ role: 'book', cmd: 'get-one' }, id);
   }
 
   createBook(bookDataEntryDto: BookDataEntryDto)

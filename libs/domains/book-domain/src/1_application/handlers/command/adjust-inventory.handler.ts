@@ -27,7 +27,6 @@ export class AdjustInventoryCommandHandler implements ICommandHandler<AdjustInve
         bookAggregate.adjustInventory();
 
         // mergeObjectContext & commit PUBLISHES EVENTS FROM AGGREGATE...
-        console.log('WTF', bookAggregate.id);
         this.eventPublisher.mergeObjectContext(bookAggregate);
         bookAggregate.commit();
         resolve();

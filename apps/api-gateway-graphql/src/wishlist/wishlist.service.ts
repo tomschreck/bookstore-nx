@@ -12,7 +12,7 @@ export class WishlistService
 
   findOne(id: string)
   {
-    return `This action returns a #${id} wishlist`;
+    return this.clientQueries.emit({ role: 'wishlist', cmd: 'get-one' }, id);
   }
 
 
@@ -29,6 +29,6 @@ export class WishlistService
 
   clear(userId: string)
   {
-    return `This action clears wishlist for ${userId}`;
+    return this.clientCommands.emit({ role: 'wishlist', cmd: 'clear' }, userId);
   }
 }

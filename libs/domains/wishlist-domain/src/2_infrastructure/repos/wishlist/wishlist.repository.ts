@@ -27,4 +27,13 @@ export class WishlistRepository
     await this.repository.save(wishlistEntity);
   }
 
+  async clearWishlist(userId: string): Promise<void>
+  {
+    const wishlistEntity: WishlistEntity = new WishlistEntity();
+    wishlistEntity.userid = userId;
+    wishlistEntity.bookList = [];
+
+    await this.repository.save(wishlistEntity);
+  }
+
 }
