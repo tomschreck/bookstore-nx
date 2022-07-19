@@ -1,0 +1,24 @@
+scalar Void
+
+type BookForWeb {
+  id: ID!
+  title: String!
+  author: String!
+  isbn: String!
+  category: String
+  status: String
+  price: Float
+  inventory: Int
+}
+
+input Search {
+  title: String
+  author: String
+  category: String
+  status: String
+}
+
+type Query {
+  bookDetails(id: ID!): BookForWeb
+  search(input: Search):[BookForWeb]
+}

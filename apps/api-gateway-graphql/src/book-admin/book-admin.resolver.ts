@@ -1,46 +1,46 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { BookService } from './book.service';
+import { BookAdminService } from './book-admin.service';
 import { AdjustInventoryInput, CreateBookInput, UpdateBookInput } from './dto';
 
-@Resolver('Book')
-export class BookResolver
+@Resolver('BookAdmin')
+export class BookAdminResolver
 {
-  constructor(private readonly bookService: BookService) { }
+  constructor(private readonly bookAdminService: BookAdminService) { }
 
   @Query('book')
   findAll()
   {
-    return this.bookService.findAll();
+    return this.bookAdminService.findAll();
   }
 
   @Query('book')
   findOne(@Args('id') id: string)
   {
-    return this.bookService.findOne(id);
+    return this.bookAdminService.findOne(id);
   }
 
 
   @Mutation('createBook')
   create(@Args('createBookInput') createBookInput: CreateBookInput)
   {
-    return this.bookService.create(createBookInput);
+    return this.bookAdminService.create(createBookInput);
   }
 
   @Mutation('updateBook')
   update(@Args('updateBookInput') updateBookInput: UpdateBookInput)
   {
-    return this.bookService.update(updateBookInput);
+    return this.bookAdminService.update(updateBookInput);
   }
 
   @Mutation('adjustInventory')
   adjustInventory(@Args('adjustInventoryInput') adjustInventoryInput: AdjustInventoryInput)
   {
-    return this.bookService.adjustInventory(adjustInventoryInput);
+    return this.bookAdminService.adjustInventory(adjustInventoryInput);
   }
 
   @Mutation('removeBook')
   remove(@Args('id') id: string)
   {
-    return this.bookService.remove(id);
+    return this.bookAdminService.remove(id);
   }
 }

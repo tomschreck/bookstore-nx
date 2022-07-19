@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { BookResolver } from './book.resolver';
-import { BookService } from './book.service';
+import { BookAdminResolver } from './book-admin.resolver';
+import { BookAdminService } from './book-admin.service';
 
 @Module({
   imports:
@@ -12,6 +12,6 @@ import { BookService } from './book.service';
           { name: 'SERVICE_ADMIN_PORTAL_QUERIES', transport: Transport.TCP, options: { port: 3001 } }
         ]),
     ],
-  providers: [ BookResolver, BookService ]
+  providers: [ BookAdminResolver, BookAdminService ]
 })
-export class BookModule { }
+export class BookAdminModule { }

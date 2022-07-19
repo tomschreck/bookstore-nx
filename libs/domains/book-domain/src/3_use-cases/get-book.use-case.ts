@@ -1,6 +1,6 @@
 import { IUseCase } from '@bookstore-nx/ddd-core';
 import { Injectable } from "@nestjs/common";
-import { BookReadOnlyEntity, BookReadOnlyRepository } from '../2_infrastructure';
+import { BookEntity, BookRepository } from '../2_infrastructure';
 import { BookDto } from '../shared';
 
 
@@ -9,22 +9,23 @@ export class GetBookUseCase implements IUseCase<string, BookDto> {
 
   constructor
     (
-      readonly bookReadOnlyRepository: BookReadOnlyRepository
+      readonly bookRepository: BookRepository
     ) { }
 
   async executeAsync(input: string): Promise<BookDto>
   {
-    const bookReadOnlyEntity: BookReadOnlyEntity = await this.bookReadOnlyRepository.findOneBy(input);
+    const bookEntity: BookEntity = await this.bookRepository.findOneBy(input);
 
     const bookDto: BookDto = {
-      id: bookReadOnlyEntity.id,
-      title: bookReadOnlyEntity.title,
-      author: bookReadOnlyEntity.author,
-      isbn: bookReadOnlyEntity.isbn,
-      category: bookReadOnlyEntity.category,
-      status: bookReadOnlyEntity.status,
-      price: bookReadOnlyEntity.price,
-      inventory: bookReadOnlyEntity.inventory
+      id: bookEntity.id,
+      title: bookEntity.title,
+      author: bookEntity.author,
+      isbn: bookEntity.isbn,
+      category: bookEntity.category,
+      status: bookEntity.status,
+      price: bookEntity.price,
+      inventory: bookEntity.inventory,
+      notes: bookEntity.notes
     };
 
     return bookDto;

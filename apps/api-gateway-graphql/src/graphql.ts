@@ -31,16 +31,16 @@ export interface UpdateBookInput {
     notes?: Nullable<string>;
 }
 
-export interface Search {
-    title: string;
-    author: string;
-    category?: Nullable<string>;
-    status?: Nullable<string>;
-}
-
 export interface AdjustInventoryInput {
     id: string;
     inventory?: Nullable<number>;
+}
+
+export interface Search {
+    title?: Nullable<string>;
+    author?: Nullable<string>;
+    category?: Nullable<string>;
+    status?: Nullable<string>;
 }
 
 export interface WishlistInput {
@@ -60,22 +60,11 @@ export interface Book {
     notes?: Nullable<string>;
 }
 
-export interface BookForWeb {
-    id: string;
-    title: string;
-    author: string;
-    isbn: string;
-    category?: Nullable<string>;
-    status?: Nullable<string>;
-    price?: Nullable<number>;
-    inventory?: Nullable<number>;
-}
-
 export interface IQuery {
     books(): Nullable<Book>[] | Promise<Nullable<Book>[]>;
     book(id: string): Nullable<Book> | Promise<Nullable<Book>>;
-    bookForWeb(id: string): Nullable<BookForWeb> | Promise<Nullable<BookForWeb>>;
-    searchBooksForWeb(search?: Nullable<Search>): Nullable<Nullable<Book>[]> | Promise<Nullable<Nullable<Book>[]>>;
+    bookDetails(id: string): Nullable<BookForWeb> | Promise<Nullable<BookForWeb>>;
+    search(input?: Nullable<Search>): Nullable<Nullable<BookForWeb>[]> | Promise<Nullable<Nullable<BookForWeb>[]>>;
     wishlist(userId: string): Nullable<Wishlist> | Promise<Nullable<Wishlist>>;
 }
 
@@ -87,6 +76,17 @@ export interface IMutation {
     createWishlist(input: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
     removeWishlist(input: WishlistInput): Nullable<Void> | Promise<Nullable<Void>>;
     clearWishlist(userId: string): Nullable<Void> | Promise<Nullable<Void>>;
+}
+
+export interface BookForWeb {
+    id: string;
+    title: string;
+    author: string;
+    isbn: string;
+    category?: Nullable<string>;
+    status?: Nullable<string>;
+    price?: Nullable<number>;
+    inventory?: Nullable<number>;
 }
 
 export interface Wishlist {

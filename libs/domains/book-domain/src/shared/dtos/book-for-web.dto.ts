@@ -1,4 +1,4 @@
-export interface BookDto
+export interface BookForWebDto
 {
   id: string;
   title: string;
@@ -8,5 +8,4 @@ export interface BookDto
   status: string;
   price: number;
   inventory: number;
-  notes: string;
 }

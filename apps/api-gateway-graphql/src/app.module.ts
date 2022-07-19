@@ -2,8 +2,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { BookModule } from './book/book.module';
+import { BookAdminModule } from './book-admin/book-admin.module';
 import { upperDirectiveTransformer } from './common/directives';
+import { WebPortalModule } from './web-portal/web-portal.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 
 
@@ -19,7 +20,8 @@ import { WishlistModule } from './wishlist/wishlist.module';
       },
       playground: true
     }),
-    BookModule,
+    BookAdminModule,
+    WebPortalModule,
     WishlistModule
   ]
 })

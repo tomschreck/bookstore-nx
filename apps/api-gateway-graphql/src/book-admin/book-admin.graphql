@@ -12,17 +12,6 @@ type Book {
   notes: String
 }
 
-type BookForWeb {
-  id: ID!
-  title: String!
-  author: String!
-  isbn: String!
-  category: String
-  status: String
-  price: Float
-  inventory: Int
-}
-
 input CreateBookInput {
   id: ID!
   title: String!
@@ -47,13 +36,6 @@ input UpdateBookInput {
   notes: String
 }
 
-input Search {
-  title: String!
-  author: String!
-  category: String
-  status: String
-}
-
 input AdjustInventoryInput {
   id: ID!
   inventory: Int
@@ -62,8 +44,6 @@ input AdjustInventoryInput {
 type Query {
   books: [Book]!
   book(id: ID!): Book
-  bookForWeb(id: ID!): BookForWeb
-  searchBooksForWeb(search: Search):[Book]
 }
 
 type Mutation {

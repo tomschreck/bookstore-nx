@@ -3,7 +3,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { AdjustInventoryInput, CreateBookInput, UpdateBookInput } from './dto';
 
 @Injectable()
-export class BookService
+export class BookAdminService
 {
   constructor(
     @Inject('SERVICE_ADMIN_PORTAL_COMMANDS') private readonly clientCommands: ClientProxy,
