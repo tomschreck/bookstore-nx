@@ -1,0 +1,19 @@
+import { IUseCase } from '@bookstore-nx/ddd-core';
+import { Injectable } from "@nestjs/common";
+import { CommandBus } from '@nestjs/cqrs';
+import { <%= dtoName %>Dto } from '../shared';
+
+
+@Injectable()
+export class CreateBookUseCase implements IUseCase<<%= dtoName %>Dto, void>
+{
+
+  constructor(readonly commandBus: CommandBus) { }
+
+  async executeAsync(input: <%= dtoName %>Dto): Promise<void>
+  {
+    const command: CreateBookCommand = CreateBookCommand.create(input);
+    return this.commandBus.execute(command);
+  }
+
+}

@@ -2,7 +2,7 @@ import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, Tre
 import * as path from 'path';
 import { doesFileExist, DtoSubstitutions, getGeneratorMetaData, PATH_TO_SHARED_TEMPLATES_DTO, toDtoSubstitutions } from '../base.generator';
 
-interface DomainUseCaseQuerySchema
+interface DomainUseCaseCommandSchema
 {
   name: string;
   dtoName: string;
@@ -10,7 +10,7 @@ interface DomainUseCaseQuerySchema
 }
 
 
-export default async function (tree: Tree, schema: DomainUseCaseQuerySchema)
+export default async function (tree: Tree, schema: DomainUseCaseCommandSchema)
 {
   // GET META DATA & PROJECT NEEDED TO GENERATE CONTENT FROM TEMPLATES
   const { substitutions, project } = getGeneratorMetaData(tree, schema.name, schema.projectName);

@@ -18,6 +18,13 @@ export interface Substitutions
   tmpl?: string;
 }
 
+export interface DtoSubstitutions extends Substitutions
+{
+  dtoName: string;
+  dtoPropertyName: string;
+  dtoFileName: string;
+}
+
 function toSubstitutions(input: string): Substitutions
 {
   /*
@@ -40,6 +47,18 @@ function toSubstitutions(input: string): Substitutions
     ...nameVariations,
     // remove __tmpl__ from file endings
     tmpl: ''
+  };
+};
+
+export function toDtoSubstitutions(substitutions: Substitutions, dtoName: string): DtoSubstitutions
+{
+  const dtoNameVariations = names(dtoName);
+
+  return {
+    ...substitutions,
+    dtoName: dtoNameVariations.name,
+    dtoPropertyName: dtoNameVariations.propertyName,
+    dtoFileName: dtoNameVariations.fileName
   };
 };
 
