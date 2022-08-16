@@ -1,4 +1,4 @@
-import { getProjects, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import { getProjects, joinPathFragments, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
 
 
 interface GeneratorMetaData
@@ -48,7 +48,7 @@ function getProject(tree: Tree, projectName: string): ProjectConfiguration
   return getProjects(tree).get(projectName);
 }
 
-export default function getGeneratorMetaData(tree: Tree, name: string, projectName: string): GeneratorMetaData
+export function getGeneratorMetaData(tree: Tree, name: string, projectName: string): GeneratorMetaData
 {
   const generatorMetaData: GeneratorMetaData = {
     substitutions: toSubstitutions(name),
@@ -57,3 +57,21 @@ export default function getGeneratorMetaData(tree: Tree, name: string, projectNa
 
   return generatorMetaData;
 };
+
+export function doesFileExist(tree: Tree, pathToFile: string): boolean
+{
+  const doesExist: boolean = tree.exists(pathToFile);
+
+  if (doesExist)
+  {
+    console.log('');
+    console.log('---------------------------------------------------------------------------------');
+    console.error(`!!! WARNING !!!   Can NOT generate '${pathToFile}' because file already exists.`);
+    console.log('---------------------------------------------------------------------------------');
+    console.log('');
+  }
+
+  return doesExist;
+}
+
+export const PATH_TO_SHARED_TEMPLATES_DTO: string = joinPathFragments(__dirname, 'shared-templates', 'templates_dto');

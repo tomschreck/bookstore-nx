@@ -5,7 +5,7 @@ export class <%= className %>AggregateError extends DomainError
 {
   constructor(errorMessage: string)
   {
-    super(errorMessage, null, '<%= name %> Aggregate Error');
+    super(errorMessage, null, '<%= className %> Aggregate Error');
   }
 }
 

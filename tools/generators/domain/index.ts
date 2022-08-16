@@ -1,7 +1,7 @@
-import { formatFiles, generateFiles, getProjects, installPackagesTask, joinPathFragments, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, names, Tree } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/workspace/generators';
 import { Schema } from '@nrwl/workspace/src/generators/library/schema';
-import getGeneratorMetaData from '../base.generator';
+import { getGeneratorMetaData } from '../base.generator';
 
 interface DomainSchema
 {
@@ -12,7 +12,7 @@ export default async function (tree: Tree, schema: DomainSchema)
 {
   const nameVariations = names(schema.name);
   const directory: string = 'domains';
-  const projectName: string = `${directory}-${nameVariations.fileName}`
+  const projectName: string = `${directory}-${nameVariations.fileName}`;
 
 
   // CREATE AND REGISTER LIBRARY WITH NX
