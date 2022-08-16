@@ -8,7 +8,7 @@ interface GeneratorMetaData
   directoryFolderName?: string;
 }
 
-interface Substitutions
+export interface Substitutions
 {
   name: string;
   className: string;
