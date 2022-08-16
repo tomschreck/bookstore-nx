@@ -1,6 +1,7 @@
 import { Aggregate, DomainError, Either, failure, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { <%= className %>Dto } from '../shared';
 
+
 export class <%= className %>AggregateError extends DomainError
 {
   constructor(errorMessage: string)

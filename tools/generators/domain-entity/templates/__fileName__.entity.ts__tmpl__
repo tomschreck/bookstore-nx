@@ -1,7 +1,8 @@
 import { DomainError, Either, Entity, failure, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { <%= className %>Dto } from '../shared';
 
-export class <%= className %>Error extends DomainError
+
+export class <%= className %>EntityError extends DomainError
 {
   constructor(errorMessage: string)
   {
@@ -14,7 +15,7 @@ export type <%= className %>Result = Either<
   <%= className %>,
 
   // Failures
-  <%= className %>Error
+  <%= className %>EntityError
 >;
 
 export class <%= className %> extends Entity<<%= className %>Dto>
@@ -37,7 +38,7 @@ export class <%= className %> extends Entity<<%= className %>Dto>
 
     const guardResult = Guard.combine(guardList);
 
-    if (!guardResult.succeeded) return failure(new <%= className %>Error(guardResult.message));
+    if (!guardResult.succeeded) return failure(new <%= className %>EntityError(guardResult.message));
     */
 
     const <%= propertyName %> = new <%= className %>({ ...props, id: props.id || id.toString() }, id);

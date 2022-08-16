@@ -1,0 +1,52 @@
+import { DomainError, Either, failure, Guard, IGuardResult, success, ValueObject } from '@bookstore-nx/ddd-core';
+
+interface <%= className %>Props
+{
+  value: string;
+}
+
+export class <%= className %>ValueObjectError extends DomainError
+{
+  constructor(errorMessage: string)
+  {
+    super(errorMessage, null, '<%= className %> Value Object Error');
+  }
+}
+
+export type <%= className %>Result = Either<
+  // Success
+  <%= className %>,
+
+  // Failures
+  <%= className %>ValueObjectError
+>;
+
+export class <%= className %> extends ValueObject<<%= className %>Props>
+{
+  get value(): string
+  {
+    return this.props.value;
+  }
+
+  private constructor(props: <%= className %>Props)
+  {
+    super(props);
+  }
+
+
+  static create(value: string): <%= className %>Result
+  {
+    const guardList: IGuardResult[] = [];
+    guardList.push(Guard.againstNullOrUndefined(value, '<%= name %>'));
+    // DOES <%= name %> VALUE OBJECT NEED A REGEX GUARD TO TEST VALUE INPUT?
+    // guardList.push(Guard.passesRegex(value, '<%= name %>', CONFIG.REGEX.SOME_PATTERN));
+
+    const guardResult = Guard.combine(guardList);
+
+    if (!guardResult.succeeded) return failure(new <%= className %>ValueObjectError(guardResult.message));
+
+    const <%= propertyName %> = new <%= className %>({ value });
+
+    return success(<%= propertyName %>);
+  }
+}
