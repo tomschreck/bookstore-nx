@@ -20,9 +20,7 @@ export interface Substitutions
 
 export interface DtoSubstitutions extends Substitutions
 {
-  dtoName: string;
-  dtoPropertyName: string;
-  dtoFileName: string;
+  dto: Substitutions;
 }
 
 function toSubstitutions(input: string): Substitutions
@@ -56,9 +54,10 @@ export function toDtoSubstitutions(substitutions: Substitutions, dtoName: string
 
   return {
     ...substitutions,
-    dtoName: dtoNameVariations.name,
-    dtoPropertyName: dtoNameVariations.propertyName,
-    dtoFileName: dtoNameVariations.fileName
+    dto: {
+      ...dtoNameVariations,
+      tmpl: ''
+    }
   };
 };
 

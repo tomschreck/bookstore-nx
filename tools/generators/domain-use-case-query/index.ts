@@ -19,7 +19,7 @@ export default async function (tree: Tree, schema: DomainUseCaseQuerySchema)
   const targetPath: string = path.join(project.sourceRoot, '3_use-cases');
   const targetPathDto: string = path.join(project.sourceRoot, 'shared', 'dtos');
   const pathToUseCaseFile: string = path.join(targetPath, `${dtoSubstitutions.fileName}.use-case.ts`);
-  const pathToDtoFile: string = path.join(targetPathDto, `${dtoSubstitutions.dtoFileName}.dto.ts`);
+  const pathToDtoFile: string = path.join(targetPathDto, `${dtoSubstitutions.dto.fileName}.dto.ts`);
 
   if (!doesFileExist(tree, pathToUseCaseFile))
   {
@@ -29,13 +29,8 @@ export default async function (tree: Tree, schema: DomainUseCaseQuerySchema)
 
   if (!doesFileExist(tree, pathToDtoFile))
   {
-    dtoSubstitutions = {
-      ...dtoSubstitutions,
-      fileName: dtoSubstitutions.dtoFileName
-    };
-
     // generate folders and files from ./templates into the target path (project.sourceRoot)
-    generateFiles(tree, PATH_TO_SHARED_TEMPLATES_DTO, targetPathDto, dtoSubstitutions);
+    generateFiles(tree, PATH_TO_SHARED_TEMPLATES_DTO, targetPathDto, dtoSubstitutions.dto);
   }
 
   await formatFiles(tree);
