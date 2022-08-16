@@ -1,0 +1,48 @@
+import { Aggregate, DomainError, Either, failure, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
+import { <%= className %>Dto } from '../shared';
+
+export class <%= className %>AggregateError extends DomainError
+{
+  constructor(errorMessage: string)
+  {
+    super(errorMessage, null, '<%= name %> Aggregate Error');
+  }
+}
+
+export type <%= className %>AggregateResult = Either<
+  // Success
+  <%= className %>Aggregate,
+
+  // Failures
+  <%= className %>AggregateError
+>;
+
+export class <%= className %>Aggregate extends Aggregate<<%= className %>Dto>
+{
+  private constructor(props: <%= className %>Dto, id?: UniqueEntityID)
+  {
+    super(props, id);
+
+    // console.log(`IS NEW AGGREGATE: ${this.isNewAggregate}`);
+    // console.log(`props id: ${props.id}`);
+    // console.log(`this id: ${this.id}`);
+  }
+
+
+  static create(props: <%= className %>Dto, id?: UniqueEntityID): <%= className %>AggregateResult
+  {
+    /*
+    const guardList: IGuardResult[] = [];
+    guardList.push(Guard.againstNullOrUndefined(props.XXX, 'XXX'));
+    guardList.push(Guard.againstNullOrUndefined(props.YYY, 'YYY'));
+
+    const guardResult = Guard.combine(guardList);
+
+    if (!guardResult.succeeded) return failure(new <%= className %>AggregateError(guardResult.message));
+    */
+
+    const <%= propertyName %>Aggregate = new <%= className %>Aggregate({ ...props, id: props.id || id.toString() }, id);
+
+    return success(<%= propertyName %>Aggregate);
+  }
+}

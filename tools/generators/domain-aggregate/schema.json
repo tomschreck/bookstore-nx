@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "domain-aggregate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "domain aggregate name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "projectName":{
+      "type": "string",
+      "description": "Select a domain project",
+      "$default": {
+        "$source": "projectName",
+        "index": 1
+      }
+    }
+  },
+  "required": ["name", "projectName"]
+}
