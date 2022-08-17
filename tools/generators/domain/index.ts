@@ -1,4 +1,5 @@
 import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, names, Tree } from '@nrwl/devkit';
+import { moduleGenerator, ModuleGeneratorOptions } from '@nrwl/nest/src/generators/module/module';
 import { libraryGenerator } from '@nrwl/workspace/generators';
 import { Schema } from '@nrwl/workspace/src/generators/library/schema';
 import { getGeneratorMetaData } from '../base.generator';
@@ -16,21 +17,27 @@ export default async function (tree: Tree, schema: DomainSchema)
 
 
   // CREATE AND REGISTER LIBRARY WITH NX
-  const domainSchema: Schema = {
+  const librarySchema: Schema = {
     name: schema.name,
     directory: directory,
     standaloneConfig: true
   };
 
-  await libraryGenerator(tree, domainSchema);
-
+  await libraryGenerator(tree, librarySchema);
 
   // GET META DATA & PROJECT NEEDED TO GENERATE CONTENT FROM TEMPLATES
   const { substitutions, project } = getGeneratorMetaData(tree, schema.name, projectName);
 
 
-  // console.log('substitutions', substitutions);
-  // console.log('project', project);
+  // CREATE NEST JS ROOT MODULE
+  const moduleSchema: ModuleGeneratorOptions = {
+    name: substitutions.fileName,
+    project: projectName,
+    flat: true
+  };
+
+  await moduleGenerator(tree, moduleSchema);
+
 
   // generate folders and files from ./templates into the target path (project.sourceRoot)
   generateFiles(
