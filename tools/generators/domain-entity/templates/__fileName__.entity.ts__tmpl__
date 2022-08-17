@@ -1,5 +1,5 @@
 import { DomainError, Either, Entity, failure, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
-import { <%= className %>Dto } from '../shared';
+import { <%= dto.className %>Dto } from '../shared';
 
 
 export class <%= className %>EntityError extends DomainError
@@ -18,9 +18,9 @@ export type <%= className %>Result = Either<
   <%= className %>EntityError
 >;
 
-export class <%= className %> extends Entity<<%= className %>Dto>
+export class <%= className %> extends Entity<<%= dto.className %>Dto>
 {
-  private constructor(props: <%= className %>Dto, id?: UniqueEntityID)
+  private constructor(props: <%= dto.className %>Dto, id?: UniqueEntityID)
   {
     super(props, id);
 
@@ -29,7 +29,7 @@ export class <%= className %> extends Entity<<%= className %>Dto>
   }
 
 
-  static create(props: <%= className %>Dto, id?: UniqueEntityID): <%= className %>Result
+  static create(props: <%= dto.className %>Dto, id?: UniqueEntityID): <%= className %>Result
   {
     /*
     const guardList: IGuardResult[] = [];

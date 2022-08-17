@@ -1,33 +1,36 @@
 import { getProjects, joinPathFragments, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import { moduleGenerator, ModuleGeneratorOptions } from '@nrwl/nest/src/generators/module/module';
+import { providerGenerator, ProviderGeneratorOptions } from '@nrwl/nest/src/generators/provider/provider';
 
+interface DomainSchema
+{
+  name: string;
+  projectName: string;
+  dtoName?: string;
+}
 
 interface GeneratorMetaData
 {
-  substitutions: Substitutions;
+  templateModel: TemplateModel;
   project: ProjectConfiguration;
   directoryFolderName?: string;
 }
-
-export interface Substitutions
+interface TemplateModel
 {
   name: string;
   className: string;
   propertyName: string;
   constantName: string;
   fileName: string;
+  dto?: TemplateModel;
   tmpl?: string;
 }
 
-export interface DtoSubstitutions extends Substitutions
-{
-  dto: Substitutions;
-}
-
-function toSubstitutions(input: string): Substitutions
+function toTemplateModel(schema: DomainSchema): TemplateModel
 {
   /*
     names (schema.name) generate different variations
-    of 'name' property used for substitutions in templates
+    of 'name' property used for placeholders in templates
 
     names("myName") YIELDS:
     {
@@ -38,45 +41,70 @@ function toSubstitutions(input: string): Substitutions
       fileName: 'my-name'
     }
   */
-  const nameVariations = names(input);
+  schema.name = cleanNameFromSuffix(schema.name);
+  schema.dtoName = cleanNameFromSuffix(schema.dtoName);
+
+  const nameVariations = names(schema.name);
+  const dtoVariations = (schema.dtoName) ? names(schema.dtoName) : undefined;
 
   return {
-    // make variations available as substitutions to be used in templates
+    // make variations available as placeholders to be used in templates
     ...nameVariations,
+    dto: { tmpl: '', ...dtoVariations },
     // remove __tmpl__ from file endings
     tmpl: ''
   };
 };
 
-export function toDtoSubstitutions(substitutions: Substitutions, dtoName: string): DtoSubstitutions
+function cleanNameFromSuffix(target: string): string
 {
-  const dtoNameVariations = names(dtoName);
+  if (target)
+  {
+    [ 'use case', 'usecase', 'aggregate', 'entity', 'dto' ].forEach((suffix: string) =>
+    {
+      const cleanTarget: string = target.toLowerCase().trim();
+      const cleanSuffix: string = suffix.toLowerCase().trim();
 
-  return {
-    ...substitutions,
-    dto: {
-      ...dtoNameVariations,
-      tmpl: ''
-    }
-  };
-};
+      if (cleanTarget.endsWith(cleanSuffix))
+      {
+        target = removeSuffix(target, suffix);
+        return target;
+      }
+    });
+  }
+
+  return target;
+}
+
+function removeSuffix(target: string, suffix: string): string
+{
+  const cleanTarget: string = target.toLowerCase().trim();
+  const cleanSuffix: string = suffix.toLowerCase().trim();
+
+  if (cleanTarget && cleanTarget.endsWith(cleanSuffix))
+  {
+    return cleanTarget.slice(0, cleanTarget.lastIndexOf(cleanSuffix)).trim();
+  }
+
+  return target;
+}
 
 function getProject(tree: Tree, projectName: string): ProjectConfiguration
 {
   return getProjects(tree).get(projectName);
 }
 
-export function getGeneratorMetaData(tree: Tree, name: string, projectName: string): GeneratorMetaData
+function getGeneratorMetaData(tree: Tree, schema: DomainSchema): GeneratorMetaData
 {
   const generatorMetaData: GeneratorMetaData = {
-    substitutions: toSubstitutions(name),
-    project: getProject(tree, projectName)
+    templateModel: toTemplateModel(schema),
+    project: getProject(tree, schema.projectName)
   };
 
   return generatorMetaData;
 };
 
-export function doesFileExist(tree: Tree, pathToFile: string): boolean
+function doesFileExist(tree: Tree, pathToFile: string): boolean
 {
   const doesExist: boolean = tree.exists(pathToFile);
 
@@ -92,4 +120,41 @@ export function doesFileExist(tree: Tree, pathToFile: string): boolean
   return doesExist;
 }
 
-export const PATH_TO_SHARED_TEMPLATES_DTO: string = joinPathFragments(__dirname, 'shared-templates', 'templates_dto');
+async function generateNestJsModule(tree: Tree, projectName: string, filename: string, directory?: string)
+{
+  // CREATE NEST JS ROOT MODULE
+  const rawOptions: ModuleGeneratorOptions = {
+    project: projectName,
+    name: filename,
+    directory: directory,
+    flat: true
+  };
+
+  await moduleGenerator(tree, rawOptions);
+}
+
+async function generateNestJsProvider(tree: Tree, projectName: string, filename: string, directory?: string)
+{
+  const rawOptions: ProviderGeneratorOptions = {
+    project: projectName,
+    name: filename,
+    directory: directory,
+    flat: true
+  };
+
+  await providerGenerator(tree, rawOptions);
+}
+
+const PATH_TO_SHARED_TEMPLATES_DTO: string = joinPathFragments(__dirname, 'shared-templates', 'templates_dto');
+
+
+export
+{
+  DomainSchema,
+  TemplateModel,
+  getGeneratorMetaData,
+  generateNestJsModule,
+  generateNestJsProvider,
+  doesFileExist,
+  PATH_TO_SHARED_TEMPLATES_DTO
+};

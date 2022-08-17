@@ -4,13 +4,13 @@ import { CommandBus } from '@nestjs/cqrs';
 import { <%= dto.className %>Dto } from '../shared';
 
 @Injectable()
-export class CreateBookUseCase implements IUseCase<<%= dto.className %>Dto, void>
+export class <%= className %>UseCase implements IUseCase<<%= dto.className %>Dto, void>
 {
   constructor(readonly commandBus: CommandBus) { }
 
   async executeAsync(input: <%= dto.className %>Dto): Promise<void>
   {
-    const command: CreateBookCommand = CreateBookCommand.create(input);
+    const command: <%= className %>Command = <%= className %>Command.create(input);
     return this.commandBus.execute(command);
   }
 }

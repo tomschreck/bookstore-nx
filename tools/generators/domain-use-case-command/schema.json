@@ -6,7 +6,7 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "domain use case name for a command. ex: CreateBook (do not add 'UseCase' as suffix - it will be added for you)",
+      "description": "domain use case name for a command. ex: CreateBook",
       "$default": {
         "$source": "argv",
         "index": 0
@@ -14,7 +14,7 @@
     },
     "dtoName": {
       "type": "string",
-      "description": "dto name.  ex: BookDataEntry (do not add 'Dto' as suffix - it will be added for you)",
+      "description": "dto name.  ex: BookDto",
       "$default": {
         "$source": "argv",
         "index": 1

@@ -1,5 +1,5 @@
 import { Aggregate, DomainError, Either, failure, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
-import { <%= className %>Dto } from '../shared';
+import { <%= dto.className %>Dto } from '../shared';
 
 
 export class <%= className %>AggregateError extends DomainError
@@ -18,9 +18,9 @@ export type <%= className %>AggregateResult = Either<
   <%= className %>AggregateError
 >;
 
-export class <%= className %>Aggregate extends Aggregate<<%= className %>Dto>
+export class <%= className %>Aggregate extends Aggregate<<%= dto.className %>Dto>
 {
-  private constructor(props: <%= className %>Dto, id?: UniqueEntityID)
+  private constructor(props: <%= dto.className %>Dto, id?: UniqueEntityID)
   {
     super(props, id);
 
@@ -30,7 +30,7 @@ export class <%= className %>Aggregate extends Aggregate<<%= className %>Dto>
   }
 
 
-  static create(props: <%= className %>Dto, id?: UniqueEntityID): <%= className %>AggregateResult
+  static create(props: <%= dto.className %>Dto, id?: UniqueEntityID): <%= className %>AggregateResult
   {
     /*
     const guardList: IGuardResult[] = [];

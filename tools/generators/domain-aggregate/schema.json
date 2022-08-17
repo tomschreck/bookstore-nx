@@ -12,14 +12,22 @@
         "index": 0
       }
     },
+    "dtoName": {
+      "type": "string",
+      "description": "dto name.  ex: BookDto",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
     "projectName":{
       "type": "string",
       "description": "Select a domain project",
       "$default": {
         "$source": "projectName",
-        "index": 1
+        "index": 2
       }
     }
   },
-  "required": ["name", "projectName"]
+  "required": ["name", "dtoName", "projectName"]
 }
