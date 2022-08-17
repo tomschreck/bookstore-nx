@@ -1,4 +1,4 @@
-import { getProjects, joinPathFragments, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import { getProjects, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
 import { moduleGenerator, ModuleGeneratorOptions } from '@nrwl/nest/src/generators/module/module';
 import { providerGenerator, ProviderGeneratorOptions } from '@nrwl/nest/src/generators/provider/provider';
 
@@ -67,8 +67,7 @@ function cleanNameFromSuffix(target: string): string
 
       if (cleanTarget.endsWith(cleanSuffix))
       {
-        target = removeSuffix(target, suffix);
-        return target;
+        return removeSuffix(target, suffix);
       }
     });
   }
@@ -78,12 +77,11 @@ function cleanNameFromSuffix(target: string): string
 
 function removeSuffix(target: string, suffix: string): string
 {
-  const cleanTarget: string = target.toLowerCase().trim();
   const cleanSuffix: string = suffix.toLowerCase().trim();
 
-  if (cleanTarget && cleanTarget.endsWith(cleanSuffix))
+  if (target && target.endsWith(cleanSuffix))
   {
-    return cleanTarget.slice(0, cleanTarget.lastIndexOf(cleanSuffix)).trim();
+    return target.slice(0, target.lastIndexOf(cleanSuffix)).trim();
   }
 
   return target;
@@ -146,8 +144,6 @@ async function generateNestJsProvider(tree: Tree, projectName: string, filename:
   await providerGenerator(tree, rawOptions);
 }
 
-const PATH_TO_SHARED_TEMPLATES_DTO: string = joinPathFragments(__dirname, 'shared-templates', 'templates_dto');
-
 
 export
 {
@@ -156,6 +152,5 @@ export
   getGeneratorMetaData,
   generateNestJsModule,
   generateNestJsProvider,
-  doesFileExist,
-  PATH_TO_SHARED_TEMPLATES_DTO
+  doesFileExist
 };

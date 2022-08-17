@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "domain-dto",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "domain dto name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    }
+  },
+  "required": ["name"]
+}
