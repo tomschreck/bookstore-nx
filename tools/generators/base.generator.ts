@@ -60,32 +60,23 @@ function cleanNameFromSuffix(target: string): string
 {
   if (target)
   {
-    [ 'aggregate', 'dto', 'entity', 'event', 'use case', 'usecase' ].forEach((suffix: string) =>
+    const cleanTarget: string = target.toLowerCase().trim();
+    const array: string[] = [ 'aggregate', 'dto', 'entity', 'event', 'use case', 'usecase' ];
+
+    for (let index = 0; index < array.length; index++)
     {
-      const cleanTarget: string = target.toLowerCase().trim();
-      const cleanSuffix: string = suffix.toLowerCase().trim();
+      const cleanSuffix: string = array[ index ].toLowerCase().trim();
 
       if (cleanTarget.endsWith(cleanSuffix))
       {
-        return removeSuffix(target, suffix);
+        return target.replace(new RegExp(cleanSuffix, 'gi'), '').trim();
       }
-    });
+    }
   }
 
   return target;
 }
 
-function removeSuffix(target: string, suffix: string): string
-{
-  const cleanSuffix: string = suffix.toLowerCase().trim();
-
-  if (target && target.endsWith(cleanSuffix))
-  {
-    return target.slice(0, target.lastIndexOf(cleanSuffix)).trim();
-  }
-
-  return target;
-}
 
 function getProject(tree: Tree, projectName: string): ProjectConfiguration
 {
