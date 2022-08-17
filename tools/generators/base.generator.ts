@@ -139,7 +139,8 @@ async function generateNestJsProvider(tree: Tree, projectName: string, filename:
     project: projectName,
     name: filename,
     directory: directory,
-    flat: true
+    flat: true,
+    unitTestRunner: 'none'
   };
 
   await providerGenerator(tree, rawOptions);

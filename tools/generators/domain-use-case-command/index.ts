@@ -14,8 +14,6 @@ export default async function (tree: Tree, schema: DomainSchema)
   const targetPathDto: string = path.join(project.sourceRoot, 'shared', 'dtos');
   const pathToDtoFile: string = path.join(targetPathDto, `${templateModel.dto.fileName}.dto.ts`);
 
-  console.log('templateModel', templateModel);
-
   // REGISTER USE CASE WITH NEST JS
   await generateNestJsProvider(tree, schema.projectName, fileName, directory);
 
