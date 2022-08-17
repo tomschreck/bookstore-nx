@@ -60,7 +60,7 @@ function cleanNameFromSuffix(target: string): string
 {
   if (target)
   {
-    [ 'use case', 'usecase', 'aggregate', 'entity', 'dto' ].forEach((suffix: string) =>
+    [ 'aggregate', 'dto', 'entity', 'event', 'use case', 'usecase' ].forEach((suffix: string) =>
     {
       const cleanTarget: string = target.toLowerCase().trim();
       const cleanSuffix: string = suffix.toLowerCase().trim();

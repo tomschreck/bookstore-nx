@@ -1,6 +1,6 @@
 import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, names, Tree } from '@nrwl/devkit';
-import { libraryGenerator } from '@nrwl/workspace/generators';
-import { Schema } from '@nrwl/workspace/src/generators/library/schema';
+import { libraryGenerator } from '@nrwl/nest/src/generators/library/library';
+import { LibraryGeneratorOptions } from '@nrwl/nest/src/generators/library/schema';
 import { DomainSchema, generateNestJsModule, getGeneratorMetaData } from '../base.generator';
 
 
@@ -12,8 +12,8 @@ export default async function (tree: Tree, schema: DomainSchema)
 
   schema.projectName = projectName;
 
-  // CREATE AND REGISTER LIBRARY WITH NX
-  const librarySchema: Schema = {
+  // CREATE AND REGISTER NEST LIBRARY WITH NX
+  const librarySchema: LibraryGeneratorOptions = {
     name: schema.name,
     directory: directory,
     standaloneConfig: true
