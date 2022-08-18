@@ -2,23 +2,25 @@ import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, Tre
 import * as path from 'path';
 import { doesFileExist, DomainSchema, generateNestJsProvider, getGeneratorMetaData } from '../base.generator';
 
-
 import domainAggregateGenerator from '../domain-aggregate';
 import domainCommandGenerator from '../domain-command';
 import domainCommandHandlerGenerator from '../domain-command-handler';
 import domainDtoGenerator from '../domain-dto';
 import domainEventGenerator from '../domain-event';
 import domainEventHandlerGenerator from '../domain-event-handler';
+import domainRepositoryGenerator from '../domain-repository';
 
 /*
 COMMAND USE CASE:
 
 use case
+|- Dto
 |- Command
 |- Command Handler
 |- Aggregate
 |- Event
-|_ Event Handler
+|- Event Handler
+|_ Repository
 
  */
 
@@ -47,6 +49,7 @@ export default async function (tree: Tree, schema: DomainSchema)
   await domainAggregateGenerator(tree, schema);
   await domainEventGenerator(tree, schema);
   await domainEventHandlerGenerator(tree, schema);
+  await domainRepositoryGenerator(tree, schema);
 
   await formatFiles(tree);
 

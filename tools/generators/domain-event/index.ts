@@ -26,7 +26,7 @@ export default async function (tree: Tree, schema: DomainSchema)
   }
 
   // GENERATE DTO...
-  domainDtoGenerator(tree, schema);
+  await domainDtoGenerator(tree, schema);
 
   await formatFiles(tree);
 

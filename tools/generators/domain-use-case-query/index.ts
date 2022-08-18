@@ -1,8 +1,18 @@
 import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, Tree } from '@nrwl/devkit';
 import * as path from 'path';
 import { doesFileExist, DomainSchema, generateNestJsProvider, getGeneratorMetaData } from '../base.generator';
-import domainDtoGenerator from '../domain-dto';
 
+import domainDtoGenerator from '../domain-dto';
+import domainRepositoryGenerator from '../domain-repository';
+
+/*
+QUERY USE CASE:
+
+use case
+|- Dto
+|_ Repository
+
+ */
 
 export default async function (tree: Tree, schema: DomainSchema)
 {
@@ -22,8 +32,9 @@ export default async function (tree: Tree, schema: DomainSchema)
     generateFiles(tree, joinPathFragments(__dirname, './templates'), pathToFolder, templateModel);
   }
 
-  // GENERATE DTO...
-  domainDtoGenerator(tree, schema);
+  // GENERATE ARCHITECTURE LAYERS...
+  await domainDtoGenerator(tree, schema);
+  await domainRepositoryGenerator(tree, schema);
 
   await formatFiles(tree);
 

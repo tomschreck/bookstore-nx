@@ -10,12 +10,12 @@ export class <%= className %>UseCase implements IUseCase<string, <%= dto.classNa
   /*
   TO-DO:  CREATE A REPOSITORY FOR RETRIEVING DTO RAW DATA
   */
-  constructor(readonly someRepository: SomeRepository) { }
+  constructor(readonly <%= repository.propertyName %>Repository: <%= repository.className %>Repository) { }
 
   async executeAsync(input: string): Promise<<%= dto.className %>Dto>
   {
     /*
-    const <%= propertyName %>Entity: <%= className %>Entity = await this.someRepository.findOneBy(input);
+    const <%= propertyName %>Entity: <%= className %>Entity = await this.<%= repository.propertyName %>Repository.findOneBy(input);
 
     const <%= propertyName %>: <%= className %> = {
       id: <%= propertyName %>Entity.id

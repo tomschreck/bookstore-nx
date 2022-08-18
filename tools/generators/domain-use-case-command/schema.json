@@ -30,7 +30,7 @@
     },
     "aggregateName": {
       "type": "string",
-      "description": "domain aggregate name.  ex: Book",
+      "description": "domain aggregate name.  ex: BookAggregate",
       "$default": {
         "$source": "argv",
         "index": 3

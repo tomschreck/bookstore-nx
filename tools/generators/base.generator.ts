@@ -10,6 +10,7 @@ interface DomainSchema
   commandName?: string;
   aggregateName?: string;
   eventName?: string;
+  repositoryName?: string;
 }
 
 interface GeneratorMetaData
@@ -25,11 +26,12 @@ interface TemplateModel
   propertyName: string;
   constantName: string;
   fileName: string;
+  tmpl?: string;
   dto?: TemplateModel;
   command?: TemplateModel;
   aggregate?: TemplateModel;
   event?: TemplateModel;
-  tmpl?: string;
+  repository?: TemplateModel;
 }
 
 function toTemplateModel(schema: DomainSchema): TemplateModel
@@ -52,12 +54,14 @@ function toTemplateModel(schema: DomainSchema): TemplateModel
   schema.commandName = cleanNameFromSuffix(schema.commandName);
   schema.aggregateName = cleanNameFromSuffix(schema.aggregateName);
   schema.eventName = cleanNameFromSuffix(schema.eventName);
+  schema.repositoryName = cleanNameFromSuffix(schema.repositoryName);
 
   const nameVariations = names(schema.name);
   const dtoVariations = (schema.dtoName) ? names(schema.dtoName) : undefined;
   const commandVariations = (schema.commandName) ? names(schema.commandName) : undefined;
   const aggregateVariations = (schema.aggregateName) ? names(schema.aggregateName) : undefined;
   const eventVariations = (schema.eventName) ? names(schema.eventName) : undefined;
+  const repositoryVariations = (schema.repositoryName) ? names(schema.repositoryName) : undefined;
 
   return {
     // make variations available as placeholders to be used in templates
@@ -66,6 +70,7 @@ function toTemplateModel(schema: DomainSchema): TemplateModel
     command: { tmpl: '', ...commandVariations },
     aggregate: { tmpl: '', ...aggregateVariations },
     event: { tmpl: '', ...eventVariations },
+    repository: { tmpl: '', ...repositoryVariations },
     // remove __tmpl__ from file endings
     tmpl: ''
   };
@@ -76,7 +81,7 @@ function cleanNameFromSuffix(target: string): string
   if (target)
   {
     const cleanTarget: string = target.toLowerCase().trim();
-    const array: string[] = [ 'aggregate', 'command', 'dto', 'entity', 'event', 'use case', 'usecase' ];
+    const array: string[] = [ 'aggregate', 'command', 'dto', 'entity', 'event', 'repository', 'use case', 'usecase' ];
 
     for (let index = 0; index < array.length; index++)
     {
