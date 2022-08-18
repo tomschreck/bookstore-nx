@@ -44,14 +44,31 @@
         "index": 4
       }
     },
+    "repositoryName": {
+      "type": "string",
+      "description": "domain repository name.  ex: BookRepository",
+      "$default": {
+        "$source": "argv",
+        "index": 5
+      }
+    },
     "projectName":{
       "type": "string",
       "description": "Select a domain project",
       "$default": {
         "$source": "projectName",
-        "index": 5
+        "index": 6
       }
     }
   },
-  "required": ["name", "dtoName", "commandName", "aggregateName", "eventName", "projectName"]
+  "required":
+  [
+    "name",
+    "dtoName",
+    "commandName",
+    "aggregateName",
+    "eventName",
+    "repositoryName",
+    "projectName"
+  ]
 }

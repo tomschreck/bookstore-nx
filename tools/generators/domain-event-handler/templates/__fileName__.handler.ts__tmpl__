@@ -14,6 +14,6 @@ export class <%= className %>EventHandler implements IEventHandler<<%= className
   async handle(event: <%= className %>Event): Promise<void>
   {
     const <%= dto.propertyName %>Dto: <%= dto.className %>Dto = event.<%= dto.propertyName %>Dto;
-    await this.bookRepository.saveBook(<%= dto.propertyName %>Dto);
+    await this.bookRepository.save(<%= dto.propertyName %>Dto);
   }
 }

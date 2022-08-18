@@ -24,13 +24,11 @@ export default async function (tree: Tree, schema: DomainSchema)
   // GET META DATA & PROJECT NEEDED TO GENERATE CONTENT FROM TEMPLATES
   const { templateModel, project } = getGeneratorMetaData(tree, schema);
 
-
   // CREATE NEST JS MODULES FOR EACH DOMAIN SUBFOLDER
   await generateNestJsModule(tree, projectName, templateModel.fileName);
   await generateNestJsModule(tree, projectName, 'application', '1_application');
   await generateNestJsModule(tree, projectName, 'infrastructure', '2_infrastructure');
   await generateNestJsModule(tree, projectName, 'use-cases', '3_use-cases');
-
 
   // generate folders and files from ./templates into the target path (project.sourceRoot)
   generateFiles(

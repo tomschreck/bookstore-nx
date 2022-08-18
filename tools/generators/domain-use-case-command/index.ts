@@ -39,7 +39,12 @@ export default async function (tree: Tree, schema: DomainSchema)
     await generateNestJsProvider(tree, schema.projectName, fileName, directory);
 
     // generate folders and files from ./templates into the target path (project.sourceRoot)
-    generateFiles(tree, joinPathFragments(__dirname, './templates'), pathToFolder, templateModel);
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, './templates'),
+      pathToFolder,
+      templateModel
+    );
   }
 
   // GENERATE ARCHITECTURE LAYERS...
