@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "$id": "domain-dto",
+  "$id": "domain-event-handler",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "domain dto name",
+      "description": "domain event name",
       "$default": {
         "$source": "argv",
         "index": 0

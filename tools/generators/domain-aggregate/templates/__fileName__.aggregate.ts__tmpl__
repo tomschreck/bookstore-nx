@@ -30,6 +30,18 @@ export class <%= className %>Aggregate extends Aggregate<<%= dto.className %>Dto
   }
 
 
+  /*
+  TO-DO: specify the aggregate functions which initiates events
+
+  NOTE: these functions are called from command handlers to initiate events...
+
+  createBook()
+  {
+    this.apply(BookCreatedEvent.create(this.book.props));
+  }
+  */
+
+
   static create(props: <%= dto.className %>Dto, id?: UniqueEntityID): <%= className %>AggregateResult
   {
     /*

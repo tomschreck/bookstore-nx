@@ -20,14 +20,38 @@
         "index": 1
       }
     },
+    "commandName": {
+      "type": "string",
+      "description": "domain command name.  ex: CreateBook",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      }
+    },
+    "aggregateName": {
+      "type": "string",
+      "description": "domain aggregate name.  ex: Book",
+      "$default": {
+        "$source": "argv",
+        "index": 3
+      }
+    },
+    "eventName": {
+      "type": "string",
+      "description": "domain event name.  ex: BookCreated",
+      "$default": {
+        "$source": "argv",
+        "index": 4
+      }
+    },
     "projectName":{
       "type": "string",
       "description": "Select a domain project",
       "$default": {
         "$source": "projectName",
-        "index": 2
+        "index": 5
       }
     }
   },
-  "required": ["name", "dtoName", "projectName"]
+  "required": ["name", "dtoName", "commandName", "aggregateName", "eventName", "projectName"]
 }

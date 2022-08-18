@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "$id": "domain-dto",
+  "$id": "domain-command-handler",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "domain dto name",
+      "description": "domain command handler name",
       "$default": {
         "$source": "argv",
         "index": 0
@@ -20,14 +20,22 @@
         "index": 1
       }
     },
+    "aggregateName": {
+      "type": "string",
+      "description": "domain aggregate name.  ex: BookAggregate",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      }
+    },
     "projectName":{
       "type": "string",
       "description": "Select a domain project",
       "$default": {
         "$source": "projectName",
-        "index": 2
+        "index": 3
       }
     }
   },
-  "required": ["name", "dtoName", "projectName"]
+  "required": ["name", "dtoName", "aggregateName", "projectName"]
 }
