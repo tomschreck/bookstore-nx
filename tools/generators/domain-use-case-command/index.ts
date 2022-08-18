@@ -31,7 +31,7 @@ export default async function (tree: Tree, schema: DomainSchema)
   const directory: string = '3_use-cases';
   const fileName: string = `${templateModel.fileName}.use-case`;
   const pathToFolder: string = path.join(project.sourceRoot, directory);
-  const pathToFile: string = path.join(pathToFolder, fileName);
+  const pathToFile: string = path.join(pathToFolder, `${fileName}.ts`);
 
   if (!doesFileExist(tree, pathToFile))
   {

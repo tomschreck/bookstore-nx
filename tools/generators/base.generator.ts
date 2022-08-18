@@ -81,7 +81,7 @@ function cleanNameFromSuffix(target: string): string
   if (target)
   {
     const cleanTarget: string = target.toLowerCase().trim();
-    const array: string[] = [ 'aggregate', 'command', 'dto', 'entity', 'event', 'repository', 'use case', 'usecase' ];
+    const array: string[] = [ 'aggregate', 'command', 'dto', 'entity', 'event', 'repository', 'repo', 'use case', 'usecase' ];
 
     for (let index = 0; index < array.length; index++)
     {
@@ -120,9 +120,9 @@ function doesFileExist(tree: Tree, pathToFile: string): boolean
   if (doesExist)
   {
     console.log('');
-    console.log('---------------------------------------------------------------------------------');
-    console.error(`!!! WARNING !!!   Can NOT generate '${pathToFile}' because file already exists.`);
-    console.log('---------------------------------------------------------------------------------');
+    console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
+    console.error(`!!! WARNING !!!   Can NOT generate '${pathToFile}' because it either already exists in codebase or has been added to tree to be generated.`);
+    console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
     console.log('');
   }
 

@@ -21,7 +21,7 @@ export default async function (tree: Tree, schema: DomainSchema)
   const directory: string = '3_use-cases';
   const fileName: string = `${templateModel.fileName}.use-case`;
   const pathToFolder: string = path.join(project.sourceRoot, directory);
-  const pathToFile: string = path.join(pathToFolder, fileName);
+  const pathToFile: string = path.join(pathToFolder, `${fileName}.ts`);
 
   if (!doesFileExist(tree, pathToFile))
   {
@@ -29,7 +29,12 @@ export default async function (tree: Tree, schema: DomainSchema)
     await generateNestJsProvider(tree, schema.projectName, fileName, directory);
 
     // generate folders and files from ./templates into the target path (project.sourceRoot)
-    generateFiles(tree, joinPathFragments(__dirname, './templates'), pathToFolder, templateModel);
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, './templates'),
+      pathToFolder,
+      templateModel
+    );
   }
 
   // GENERATE ARCHITECTURE LAYERS...

@@ -1,5 +1,6 @@
 import { IUseCase } from '@bookstore-nx/ddd-core';
 import { Injectable } from "@nestjs/common";
+import { <%= repository.className %>Repository } from '../2_infrastructure';
 import { <%= dto.className %>Dto } from '../shared';
 
 

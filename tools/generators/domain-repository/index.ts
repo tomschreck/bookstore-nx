@@ -8,10 +8,13 @@ export default async function (tree: Tree, schema: DomainSchema)
 {
   // GET META DATA & PROJECT NEEDED TO GENERATE CONTENT FROM TEMPLATES
   const { templateModel, project } = getGeneratorMetaData(tree, schema);
+
+  const generatedFileName: string = (templateModel.repository) ? templateModel.repository.fileName : templateModel.fileName;
+
   const directory: string = path.join('2_infrastructure', 'repos');
-  const fileName: string = `${templateModel.repository.fileName}.repository`;
+  const fileName: string = `${generatedFileName}.repository`;
   const pathToFolder: string = path.join(project.sourceRoot, directory);
-  const pathToFile: string = path.join(pathToFolder, fileName);
+  const pathToFile: string = path.join(pathToFolder, `${fileName}.ts`);
 
   if (!doesFileExist(tree, pathToFile))
   {
