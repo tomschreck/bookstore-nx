@@ -38,4 +38,7 @@
   "typescriptHero.imports.multiLineWrapThreshold": 250,
   "typescriptHero.imports.organizeSortsByFirstSpecifier": true,
   "git.ignoreLimitWarning": true,
+  "cSpell.words": [
+    "dtos"
+  ],
 }

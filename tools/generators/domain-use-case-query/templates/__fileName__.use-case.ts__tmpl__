@@ -1,0 +1,31 @@
+import { IUseCase } from '@bookstore-nx/ddd-core';
+import { Injectable } from "@nestjs/common";
+import { <%= repository.className %>Repository } from '../2_infrastructure';
+import { <%= dto.className %>Dto } from '../shared';
+
+
+@Injectable()
+export class <%= className %>UseCase implements IUseCase<string, <%= dto.className %>Dto>
+{
+
+  /*
+  TO-DO:  CREATE A REPOSITORY FOR RETRIEVING DTO RAW DATA
+  */
+  constructor(readonly <%= repository.propertyName %>Repository: <%= repository.className %>Repository) { }
+
+  async executeAsync(input: string): Promise<<%= dto.className %>Dto>
+  {
+    /*
+    const <%= propertyName %>Entity: <%= className %>Entity = await this.<%= repository.propertyName %>Repository.findOneBy(input);
+
+    const <%= propertyName %>: <%= className %> = {
+      id: <%= propertyName %>Entity.id
+    };
+
+    return <%= propertyName %>;
+    */
+
+    throw new Error('Method not implemented.');
+  }
+
+}

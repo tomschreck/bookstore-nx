@@ -1,0 +1,21 @@
+import { CommandBase } from '@bookstore-nx/ddd-core';
+import { <%= dto.className %>Dto } from '../../shared';
+
+
+export class <%= className %>Command extends CommandBase<<%= dto.className %>Dto>
+{
+  get <%= dto.propertyName %>Dto(): <%= dto.className %>Dto
+  {
+    return this.props;
+  }
+
+  private constructor(props: <%= dto.className %>Dto)
+  {
+    super(props);
+  }
+
+  static create(props: <%= dto.className %>Dto): <%= className %>Command
+  {
+    return new <%= className %>Command(props);
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "domain-use-case-command",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "domain use case name for a command. ex: CreateBook",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "dtoName": {
+      "type": "string",
+      "description": "dto name.  ex: BookDto",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "commandName": {
+      "type": "string",
+      "description": "domain command name.  ex: CreateBook",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      }
+    },
+    "aggregateName": {
+      "type": "string",
+      "description": "domain aggregate name.  ex: BookAggregate",
+      "$default": {
+        "$source": "argv",
+        "index": 3
+      }
+    },
+    "eventName": {
+      "type": "string",
+      "description": "domain event name.  ex: BookCreated",
+      "$default": {
+        "$source": "argv",
+        "index": 4
+      }
+    },
+    "repositoryName": {
+      "type": "string",
+      "description": "domain repository name.  ex: BookRepository",
+      "$default": {
+        "$source": "argv",
+        "index": 5
+      }
+    },
+    "projectName":{
+      "type": "string",
+      "description": "Select a domain project",
+      "$default": {
+        "$source": "projectName",
+        "index": 6
+      }
+    }
+  },
+  "required":
+  [
+    "name",
+    "dtoName",
+    "commandName",
+    "aggregateName",
+    "eventName",
+    "repositoryName",
+    "projectName"
+  ]
+}

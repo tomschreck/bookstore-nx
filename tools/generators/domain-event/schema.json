@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "domain-event",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "domain event name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "dtoName": {
+      "type": "string",
+      "description": "dto name.  ex: BookDto",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "projectName":{
+      "type": "string",
+      "description": "Select a domain project",
+      "$default": {
+        "$source": "projectName",
+        "index": 2
+      }
+    }
+  },
+  "required": ["name", "dtoName", "projectName"]
+}

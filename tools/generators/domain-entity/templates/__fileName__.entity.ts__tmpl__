@@ -1,0 +1,48 @@
+import { DomainError, Either, Entity, failure, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
+import { <%= dto.className %>Dto } from '../shared';
+
+
+export class <%= className %>EntityError extends DomainError
+{
+  constructor(errorMessage: string)
+  {
+    super(errorMessage, null, '<%= className %> Entity Error');
+  }
+}
+
+export type <%= className %>Result = Either<
+  // Success
+  <%= className %>,
+
+  // Failures
+  <%= className %>EntityError
+>;
+
+export class <%= className %> extends Entity<<%= dto.className %>Dto>
+{
+  private constructor(props: <%= dto.className %>Dto, id?: UniqueEntityID)
+  {
+    super(props, id);
+
+    // console.log(`props id: ${props.id}`);
+    // console.log(`this id: ${this.id}`);
+  }
+
+
+  static create(props: <%= dto.className %>Dto, id?: UniqueEntityID): <%= className %>Result
+  {
+    /*
+    const guardList: IGuardResult[] = [];
+    guardList.push(Guard.againstNullOrUndefined(props.XXX, 'XXX'));
+    guardList.push(Guard.againstNullOrUndefined(props.YYY, 'YYY'));
+
+    const guardResult = Guard.combine(guardList);
+
+    if (!guardResult.succeeded) return failure(new <%= className %>EntityError(guardResult.message));
+    */
+
+    const <%= propertyName %> = new <%= className %>({ ...props, id: props.id || id.toString() }, id);
+
+    return success(<%= propertyName %>);
+  }
+}
