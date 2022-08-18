@@ -57,20 +57,20 @@ function toTemplateModel(schema: DomainSchema): TemplateModel
   schema.repositoryName = cleanNameFromSuffix(schema.repositoryName);
 
   const nameVariations = names(schema.name);
-  const dtoVariations = (schema.dtoName) ? names(schema.dtoName) : undefined;
-  const commandVariations = (schema.commandName) ? names(schema.commandName) : undefined;
-  const aggregateVariations = (schema.aggregateName) ? names(schema.aggregateName) : undefined;
-  const eventVariations = (schema.eventName) ? names(schema.eventName) : undefined;
-  const repositoryVariations = (schema.repositoryName) ? names(schema.repositoryName) : undefined;
+  const dtoVariations = (schema.dtoName) ? { ...names(schema.dtoName), tmpl: '' } : undefined;
+  const commandVariations = (schema.commandName) ? { ...names(schema.commandName), tmpl: '' } : undefined;
+  const aggregateVariations = (schema.aggregateName) ? { ...names(schema.aggregateName), tmpl: '' } : undefined;
+  const eventVariations = (schema.eventName) ? { ...names(schema.eventName), tmpl: '' } : undefined;
+  const repositoryVariations = (schema.repositoryName) ? { ...names(schema.repositoryName), tmpl: '' } : undefined;
 
   return {
     // make variations available as placeholders to be used in templates
     ...nameVariations,
-    dto: { tmpl: '', ...dtoVariations },
-    command: { tmpl: '', ...commandVariations },
-    aggregate: { tmpl: '', ...aggregateVariations },
-    event: { tmpl: '', ...eventVariations },
-    repository: { tmpl: '', ...repositoryVariations },
+    dto: dtoVariations,
+    command: commandVariations,
+    aggregate: aggregateVariations,
+    event: eventVariations,
+    repository: repositoryVariations,
     // remove __tmpl__ from file endings
     tmpl: ''
   };
@@ -120,9 +120,10 @@ function doesFileExist(tree: Tree, pathToFile: string): boolean
   if (doesExist)
   {
     console.log('');
-    console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
-    console.error(`!!! WARNING !!!   Can NOT generate '${pathToFile}' because it either already exists in codebase or has been added to tree to be generated.`);
-    console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
+    console.log('------------------------------------------------------------------------------------------------------------');
+    console.error(`!!! WARNING !!!   Can NOT generate '${pathToFile}'
+    \n because it either already exists in codebase or has been added to tree to be generated.`);
+    console.log('------------------------------------------------------------------------------------------------------------');
     console.log('');
   }
 
