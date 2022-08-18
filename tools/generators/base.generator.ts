@@ -7,6 +7,9 @@ interface DomainSchema
   name: string;
   projectName: string;
   dtoName?: string;
+  commandName?: string;
+  aggregateName?: string;
+  eventName?: string;
 }
 
 interface GeneratorMetaData
@@ -23,6 +26,9 @@ interface TemplateModel
   constantName: string;
   fileName: string;
   dto?: TemplateModel;
+  command?: TemplateModel;
+  aggregate?: TemplateModel;
+  event?: TemplateModel;
   tmpl?: string;
 }
 
@@ -43,14 +49,23 @@ function toTemplateModel(schema: DomainSchema): TemplateModel
   */
   schema.name = cleanNameFromSuffix(schema.name);
   schema.dtoName = cleanNameFromSuffix(schema.dtoName);
+  schema.commandName = cleanNameFromSuffix(schema.commandName);
+  schema.aggregateName = cleanNameFromSuffix(schema.aggregateName);
+  schema.eventName = cleanNameFromSuffix(schema.eventName);
 
   const nameVariations = names(schema.name);
   const dtoVariations = (schema.dtoName) ? names(schema.dtoName) : undefined;
+  const commandVariations = (schema.commandName) ? names(schema.commandName) : undefined;
+  const aggregateVariations = (schema.aggregateName) ? names(schema.aggregateName) : undefined;
+  const eventVariations = (schema.eventName) ? names(schema.eventName) : undefined;
 
   return {
     // make variations available as placeholders to be used in templates
     ...nameVariations,
     dto: { tmpl: '', ...dtoVariations },
+    command: { tmpl: '', ...commandVariations },
+    aggregate: { tmpl: '', ...aggregateVariations },
+    event: { tmpl: '', ...eventVariations },
     // remove __tmpl__ from file endings
     tmpl: ''
   };
@@ -61,7 +76,7 @@ function cleanNameFromSuffix(target: string): string
   if (target)
   {
     const cleanTarget: string = target.toLowerCase().trim();
-    const array: string[] = [ 'aggregate', 'dto', 'entity', 'event', 'use case', 'usecase' ];
+    const array: string[] = [ 'aggregate', 'command', 'dto', 'entity', 'event', 'use case', 'usecase' ];
 
     for (let index = 0; index < array.length; index++)
     {

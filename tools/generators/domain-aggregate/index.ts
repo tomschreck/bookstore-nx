@@ -14,7 +14,15 @@ export default async function (tree: Tree, schema: DomainSchema)
   if (!doesFileExist(tree, pathToFile))
   {
     // generate folders and files from ./templates into the target path (project.sourceRoot)
-    generateFiles(tree, joinPathFragments(__dirname, './templates'), pathToFolder, templateModel);
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, './templates'),
+      pathToFolder,
+      {
+        ...templateModel.aggregate,
+        dto: { ...templateModel.dto }
+      }
+    );
   }
 
   // GENERATE DTO...

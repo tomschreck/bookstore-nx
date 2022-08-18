@@ -29,7 +29,6 @@ export class <%= className %>Aggregate extends Aggregate<<%= dto.className %>Dto
     // console.log(`this id: ${this.id}`);
   }
 
-
   /*
   TO-DO: specify the aggregate functions which initiates events
 
@@ -40,7 +39,6 @@ export class <%= className %>Aggregate extends Aggregate<<%= dto.className %>Dto
     this.apply(BookCreatedEvent.create(this.book.props));
   }
   */
-
 
   static create(props: <%= dto.className %>Dto, id?: UniqueEntityID): <%= className %>AggregateResult
   {

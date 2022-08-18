@@ -5,7 +5,7 @@ import { doesFileExist, DomainSchema, generateNestJsProvider, getGeneratorMetaDa
 
 import domainAggregateGenerator from '../domain-aggregate';
 import domainCommandGenerator from '../domain-command';
-import domainCommandHandlerGenerator, { DomainCommandHandlerSchema } from '../domain-command-handler';
+import domainCommandHandlerGenerator from '../domain-command-handler';
 import domainDtoGenerator from '../domain-dto';
 import domainEventGenerator from '../domain-event';
 import domainEventHandlerGenerator from '../domain-event-handler';
@@ -21,14 +21,8 @@ use case
 |_ Event Handler
 
  */
-interface DomainUseCaseSchema extends DomainSchema
-{
-  commandName: string;
-  aggregateName: string;
-  eventName: string;
-}
 
-export default async function (tree: Tree, schema: DomainUseCaseSchema)
+export default async function (tree: Tree, schema: DomainSchema)
 {
   // GET META DATA & PROJECT NEEDED TO GENERATE CONTENT FROM TEMPLATES
   const { templateModel, project } = getGeneratorMetaData(tree, schema);
@@ -47,13 +41,12 @@ export default async function (tree: Tree, schema: DomainUseCaseSchema)
   }
 
   // GENERATE ARCHITECTURE LAYERS...
-  generateDto(tree, schema);
-  generateCommand(tree, schema);
-  generateCommandHandler(tree, schema);
-  generateAggregate(tree, schema);
-  generateEvent(tree, schema);
-  generateEventHandler(tree, schema);
-
+  await domainDtoGenerator(tree, schema);
+  await domainCommandGenerator(tree, schema);
+  await domainCommandHandlerGenerator(tree, schema);
+  await domainAggregateGenerator(tree, schema);
+  await domainEventGenerator(tree, schema);
+  await domainEventHandlerGenerator(tree, schema);
 
   await formatFiles(tree);
 
@@ -61,57 +54,4 @@ export default async function (tree: Tree, schema: DomainUseCaseSchema)
   {
     installPackagesTask(tree);
   };
-}
-
-
-function generateDto(tree: Tree, schema: DomainUseCaseSchema)
-{
-  domainDtoGenerator(tree, schema);
-}
-function generateCommand(tree: Tree, schema: DomainUseCaseSchema)
-{
-  const domainSchema: DomainSchema = {
-    name: schema.commandName,
-    projectName: schema.projectName,
-    dtoName: schema.dtoName
-  };
-  domainCommandGenerator(tree, domainSchema);
-}
-function generateCommandHandler(tree: Tree, schema: DomainUseCaseSchema)
-{
-  const domainSchema: DomainCommandHandlerSchema = {
-    name: schema.commandName,
-    projectName: schema.projectName,
-    dtoName: schema.dtoName,
-    aggregateName: schema.aggregateName,
-  };
-  domainCommandHandlerGenerator(tree, domainSchema);
-}
-function generateAggregate(tree: Tree, schema: DomainUseCaseSchema)
-{
-  const domainSchema: DomainSchema = {
-    name: schema.aggregateName,
-    projectName: schema.projectName,
-    dtoName: schema.dtoName
-  };
-  domainAggregateGenerator(tree, domainSchema);
-}
-function generateEvent(tree: Tree, schema: DomainUseCaseSchema)
-{
-  const domainSchema: DomainSchema = {
-    name: schema.eventName,
-    projectName: schema.projectName,
-    dtoName: schema.dtoName
-  };
-
-  domainEventGenerator(tree, domainSchema);
-}
-function generateEventHandler(tree: Tree, schema: DomainUseCaseSchema)
-{
-  const domainSchema: DomainSchema = {
-    name: schema.eventName,
-    projectName: schema.projectName,
-    dtoName: schema.dtoName
-  };
-  domainEventHandlerGenerator(tree, domainSchema);
 }

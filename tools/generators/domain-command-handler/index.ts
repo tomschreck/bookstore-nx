@@ -4,12 +4,7 @@ import { doesFileExist, DomainSchema, getGeneratorMetaData } from '../base.gener
 import domainDtoGenerator from '../domain-dto';
 
 
-export interface DomainCommandHandlerSchema extends DomainSchema
-{
-  aggregateName: string;
-}
-
-export default async function (tree: Tree, schema: DomainCommandHandlerSchema)
+export default async function (tree: Tree, schema: DomainSchema)
 {
   // GET META DATA & PROJECT NEEDED TO GENERATE CONTENT FROM TEMPLATES
   const { templateModel, project } = getGeneratorMetaData(tree, schema);
@@ -19,7 +14,16 @@ export default async function (tree: Tree, schema: DomainCommandHandlerSchema)
   if (!doesFileExist(tree, pathToFile))
   {
     // generate folders and files from ./templates into the target path (project.sourceRoot)
-    generateFiles(tree, joinPathFragments(__dirname, './templates'), pathToFolder, { ...templateModel, aggregateName: schema.aggregateName });
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, './templates'),
+      pathToFolder,
+      {
+        ...templateModel.command,
+        dto: { ...templateModel.dto },
+        aggregate: { ...templateModel.aggregate }
+      }
+    );
   }
 
   // GENERATE DTO...

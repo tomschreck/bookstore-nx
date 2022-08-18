@@ -1,6 +1,6 @@
 import { UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { <%= aggregateName %> } from '../../../0_domain';
+import { <%= aggregate.className %>Aggregate } from '../../../0_domain';
 import { <%= dto.className %>Dto } from '../../../shared';
 import { <%= className %>Command } from '../../commands';
 
@@ -18,11 +18,11 @@ export class <%= className %>CommandHandler implements ICommandHandler<<%= class
     return new Promise((resolve, reject) =>
     {
       const <%= dto.propertyName %>Dto: <%= dto.className %>Dto = command.<%= dto.propertyName %>Dto;
-      const aggregateResult = <%= aggregateName %>.create(<%= dto.propertyName %>Dto, UniqueEntityID.create(<%= dto.propertyName %>Dto.id));
+      const aggregateResult = <%= aggregate.className %>Aggregate.create(<%= dto.propertyName %>Dto, UniqueEntityID.create(<%= dto.propertyName %>Dto.id));
 
       if (aggregateResult.isSuccess())
       {
-        const aggregate: <%= aggregateName %> = aggregateResult.getValue();
+        const aggregate: <%= aggregate.className %>Aggregate = aggregateResult.getValue();
         // TO-DO: specify the aggregate function which initiates events...
         // aggregate.createBook();
 

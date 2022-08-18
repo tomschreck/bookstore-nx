@@ -1,10 +1,10 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { <%= className %>Event, BookEventBase, BookUpdatedEvent, InventoryAdjustedEvent } from '../../../0_domain';
+import { <%= className %>Event } from '../../../0_domain';
 import { <%= dto.className %>Dto } from '../../../shared';
 import { BookRepository } from '../../repos';
 
 
-@EventsHandler(<%= className %>Event, BookUpdatedEvent, InventoryAdjustedEvent)
+@EventsHandler(<%= className %>Event)
 export class <%= className %>EventHandler implements IEventHandler<<%= className %>Event> {
 
   constructor(
