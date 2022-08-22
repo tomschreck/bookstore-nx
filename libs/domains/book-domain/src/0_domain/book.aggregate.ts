@@ -2,13 +2,15 @@ import { Aggregate, Either, failure, success, UniqueEntityID } from '@bookstore-
 import { BookDataEntryDto } from '../shared';
 import { Book, BookError, BookResult } from './book.entity';
 import { BookCreatedEvent, BookUpdatedEvent, InventoryAdjustedEvent } from './events';
+import { ISBNError } from './isbn.vo';
 
 export type BookAggregateResult = Either<
   // Success
   BookAggregate,
 
   // Failures
-  BookError
+  BookError |
+  ISBNError
 >;
 
 export class BookAggregate extends Aggregate<BookDataEntryDto> {
@@ -54,7 +56,10 @@ export class BookAggregate extends Aggregate<BookDataEntryDto> {
       return failure(bookResult.getError());
     }
 
-    const bookAggregate = new BookAggregate({ ...props, id: props.id || id.toString() }, bookResult.getValue(), id);
+    // create an id if one os not provided
+    id = UniqueEntityID.create(props.id || id?.toString());
+
+    const bookAggregate = new BookAggregate({ ...props, id: id.toString() }, bookResult.getValue(), id);
 
     return success(bookAggregate);
   }

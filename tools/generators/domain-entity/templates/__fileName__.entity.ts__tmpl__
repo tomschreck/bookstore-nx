@@ -41,7 +41,11 @@ export class <%= className %> extends Entity<<%= dto.className %>Dto>
     if (!guardResult.succeeded) return failure(new <%= className %>EntityError(guardResult.message));
     */
 
-    const <%= propertyName %> = new <%= className %>({ ...props, id: props.id || id.toString() }, id);
+
+    // create an id if one os not provided
+    id = UniqueEntityID.create(props.id || id?.toString());
+
+    const <%= propertyName %> = new <%= className %>({ ...props, id: id.toString() }, id);
 
     return success(<%= propertyName %>);
   }

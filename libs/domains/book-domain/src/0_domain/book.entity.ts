@@ -1,6 +1,6 @@
 import { DomainError, Either, Entity, failure, Guard, IGuardResult, success, UniqueEntityID } from '@bookstore-nx/ddd-core';
 import { BookDataEntryDto } from '../shared';
-import { ISBN, ISBNResult } from './isbn.vo';
+import { ISBN, ISBNError, ISBNResult } from './isbn.vo';
 
 
 export type BookResult = Either<
@@ -8,7 +8,8 @@ export type BookResult = Either<
   Book,
 
   // Failures
-  BookError
+  BookError |
+  ISBNError
 >;
 
 
@@ -45,15 +46,18 @@ export class Book extends Entity<BookDataEntryDto>
 
     const isbnResult: ISBNResult = ISBN.create(props.isbn);
 
-    if (isbnResult.isFailure())
+    if (isbnResult.isFailure() === true)
     {
-      guardList.push(Guard.domainError(isbnResult.getError()));
+      return failure(isbnResult.getError());
     }
 
     const guardResult = Guard.combine(guardList);
     if (!guardResult.succeeded) return failure(new BookError(guardResult.message));
 
-    const book = new Book({ ...props, id: props.id || id.toString() }, isbnResult.getValue(), id);
+    // create an id if one os not provided
+    id = UniqueEntityID.create(props.id || id?.toString());
+
+    const book = new Book({ ...props, id: id.toString() }, isbnResult.getValue(), id);
 
     return success(book);
   }
