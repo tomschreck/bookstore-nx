@@ -52,7 +52,11 @@ export class <%= className %>Aggregate extends Aggregate<<%= dto.className %>Dto
     if (!guardResult.succeeded) return failure(new <%= className %>AggregateError(guardResult.message));
     */
 
-    const <%= propertyName %>Aggregate = new <%= className %>Aggregate({ ...props, id: props.id || id.toString() }, id);
+
+    // create an id if one os not provided
+    id = UniqueEntityID.create(props.id || id?.toString());
+
+    const <%= propertyName %>Aggregate = new <%= className %>Aggregate({ ...props, id: id.toString() }, id);
 
     return success(<%= propertyName %>Aggregate);
   }
