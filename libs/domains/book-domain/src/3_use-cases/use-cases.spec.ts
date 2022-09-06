@@ -139,6 +139,7 @@ describe('Use Cases', () =>
 
     it(`bookForWebDto should not have notes property`, async () =>
     {
+      // eslint-disable-next-line no-prototype-builtins
       expect(bookForWebDto.hasOwnProperty('note')).to.be.false;
     });
   });
