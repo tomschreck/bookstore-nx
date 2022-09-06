@@ -25,5 +25,7 @@
       }
     }
   },
-  "tags": ["scope:domain-book"]
+  "tags": [
+    "scope:domain-book"
+  ]
 }

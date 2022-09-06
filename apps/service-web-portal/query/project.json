@@ -56,5 +56,7 @@
       }
     }
   },
-  "tags": ["scope:service-web-portal"]
+  "tags": [
+    "scope:service-web-portal"
+  ]
 }

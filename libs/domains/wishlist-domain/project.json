@@ -15,5 +15,7 @@
       }
     }
   },
-  "tags": ["scope:domain-wishlist"]
+  "tags": [
+    "scope:domain-wishlist"
+  ]
 }
