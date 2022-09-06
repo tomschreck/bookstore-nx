@@ -23,10 +23,39 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:api-gateway",
+                "onlyDependOnLibsWithTags": ["scope:api-gateway", "scope:shared", "scope:domain-book", "scope:domain-wishlist"]
+              },
+              {
+                "sourceTag": "scope:service-admin-portal",
+                "onlyDependOnLibsWithTags": ["scope:service-admin-portal", "scope:shared", "scope:domain-book"]
+              },
+              {
+                "sourceTag": "scope:service-web-portal",
+                "onlyDependOnLibsWithTags": ["scope:service-web-portal", "scope:shared", "scope:domain-book", "scope:domain-wishlist"]
+              },
+              {
+                "sourceTag": "scope:service-wishlist-portal",
+                "onlyDependOnLibsWithTags": ["scope:service-wishlist-portal", "scope:shared", "scope:domain-wishlist"]
+              },
+
+
+
+              {
+                "sourceTag": "scope:domain-core",
+                "onlyDependOnLibsWithTags": ["scope:domain-core"]
+              },
+              {
+                "sourceTag": "scope:domain-book",
+                "onlyDependOnLibsWithTags": ["scope:domain-book", "scope:shared", "scope:domain-core"]
+              },
+              {
+                "sourceTag": "scope:domain-wishlist",
+                "onlyDependOnLibsWithTags": ["scope:domain-wishlist", "scope:shared", "scope:domain-core"]
               }
             ]
           }
@@ -41,7 +70,9 @@
       "extends": [
         "plugin:@nrwl/nx/typescript"
       ],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-inferrable-types": "off"
+      }
     },
     {
       "files": [
