@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UseCasesModule } from './3_use_cases';
+import { typeOrmModuleOptions } from './typeorm.config';
+
+@Module({
+  imports: [TypeOrmModule.forRoot(typeOrmModuleOptions), UseCasesModule],
+  controllers: [],
+  providers: [],
+  exports: [UseCasesModule],
+})
+export class <%= className %>Module {}

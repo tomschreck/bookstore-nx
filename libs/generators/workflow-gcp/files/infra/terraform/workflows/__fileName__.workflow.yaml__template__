@@ -1,0 +1,11 @@
+main:
+  params: [event]
+  steps:
+    - log_event:
+        call: sys.log
+        args:
+          text: $${event}
+          severity: INFO
+    - set_<%= gcpName %>_url:
+        assign:
+          - <%= gcpName %>_url: ${<%= constantName %>_URL}

@@ -1,0 +1,63 @@
+terraform {
+  backend "gcs" {
+    bucket = "signaldevs-terraform-remote-state"
+    prefix = "<%= fileName %>/state"
+  }
+}
+
+provider "google" {
+  project = local.gcp_project_id
+}
+
+locals {
+  service_name   = "<%= fileName %>"
+  region         = "us-central1"
+  gcp_project_id = data.terraform_remote_state.terraform_gcp_environment_state.outputs.project_id
+}
+
+data "terraform_remote_state" "terraform_gcp_environment_state" {
+  backend   = "gcs"
+  workspace = terraform.workspace
+  config = {
+    bucket = "signaldevs-terraform-remote-state"
+    prefix = "terraform-environment/state"
+  }
+}
+
+resource "google_service_account" "<%= gcpName %>_service_account" {
+  account_id   = "<%= fileName %>"
+  display_name = "<%= name %> service account"
+}
+
+
+# HOST REST API ON CLOUD RUN
+resource "google_cloud_run_service" "<%= gcpName %>_cloud_run_service" {
+  name     = "<%= fileName %>"
+  location = local.region
+
+  template {
+    spec {
+      containers {
+        image = "gcr.io/${local.gcp_project_id}/${local.service_name}:${var.gcr_image_tag}"
+
+        env {
+          name  = "NX_GCP_PROJECT_ID"
+          value = local.gcp_project_id
+        }
+      }
+
+      service_account_name = google_service_account.<%= gcpName %>_service_account.email
+    }
+  }
+
+  metadata {
+    annotations = {
+      "run.googleapis.com/ingress" = "internal"
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}

@@ -1,0 +1,55 @@
+/**
+ * This is not a production server yet!
+ * This is only a minimal backend to get started.
+ */
+
+import * as fs from 'fs';
+import { NestFactory } from '@nestjs/core';
+import { INestApplication, LoggerService, ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
+import { LoggerFactory } from '@sanctuary-nx/core/lib-util/utilities';
+import { AppModule } from './app.module';
+
+const PORT = process.env['PORT'] || <%= portNumber %>;
+const NX_ENVIRONMENT = process.env['NX_ENVIRONMENT'] || 'development';
+
+async function bootstrap() {
+  const logger: LoggerService = LoggerFactory.createLogger(NX_ENVIRONMENT);
+  const app: INestApplication = await NestFactory.create(AppModule, {
+    logger: logger,
+    abortOnError: false,
+  });
+  const globalPrefix: string = 'api';
+  const appName: string = '<%= name %>';
+
+  app.useGlobalPipes(new ValidationPipe({ enableDebugMessages: true }));
+  app.setGlobalPrefix(globalPrefix);
+
+  const config = new DocumentBuilder().setTitle(appName).setDescription(`Routes for the ${appName}`).setVersion('1.0').build();
+  const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
+
+  SwaggerModule.setup(globalPrefix, app, document, {
+    swaggerOptions: {
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
+    },
+  });
+
+  await app.listen(PORT, '0.0.0.0').then(async () => {
+    const url: string = await app.getUrl();
+
+    fs.writeFileSync('/tmp/healthy', 'healthy as an ox');
+    fs.writeFileSync('/tmp/live', 'we live');
+
+    logger.log('');
+    logger.log('-----------------------------------------------------------');
+    logger.log(`${appName} listening on PORT: ${PORT}`);
+    logger.log(`${appName} is running on ${url}`);
+    logger.log(`SWAGGER: ${url}/api`);
+    logger.log('');
+    logger.log('');
+    logger.log('');
+  });
+}
+
+bootstrap();

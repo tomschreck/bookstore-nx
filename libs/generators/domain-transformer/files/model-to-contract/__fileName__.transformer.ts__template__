@@ -1,0 +1,25 @@
+import { Injectable } from '@nestjs/common';
+import { Transformer } from '@sanctuary-nx/core/lib-util/ddd-core';
+import { instanceToPlain } from 'class-transformer';
+import { <%= modelName %>Model } from '../../../0_domain';
+import { OUTPUT_CONTRACT } from '../../../contracts';
+
+@Injectable()
+export class <%= className %>Transformer extends Transformer<<%= modelName %>Model, OUTPUT_CONTRACT>
+{
+  async transform(from: <%= modelName %>Model): Promise<OUTPUT_CONTRACT> {
+    return new Promise((resolve, reject) => {
+      try {
+        const contract: OUTPUT_CONTRACT = instanceToPlain(from, { strategy: 'excludeAll' }) as OUTPUT_CONTRACT;
+
+        resolve(contract);
+      } catch (error) {
+        if (error instanceof Error) {
+          reject(new Error(`Error transforming <%= modelName %>Model to contract: ${error.message}`));
+        }
+
+        reject(new Error('Error transforming <%= modelName %>Model to contract'));
+      }
+    });
+  }
+}

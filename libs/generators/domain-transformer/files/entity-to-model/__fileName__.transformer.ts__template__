@@ -1,0 +1,21 @@
+import { Injectable } from '@nestjs/common';
+import { Transformer } from '@sanctuary-nx/core/lib-util/ddd-core';
+import { <%= modelName %>Model, <%= modelName %>Result } from '../../../0_domain';
+import { <%= entityName %>Entity } from '../../entities';
+
+@Injectable()
+export class <%= className %>Transformer extends Transformer<<%= entityName %>Entity, <%= modelName %>Model>
+{
+  async transform(from: <%= entityName %>Entity): Promise<<%= modelName %>Model> {
+    const { id, created_at, updated_at, ...the_rest } = from;
+    const result: <%= modelName %>Result = await <%= modelName %>Model.create(the_rest, id);
+
+    if (result.isSuccess()) {
+      const model: <%= modelName %>Model = result.getValue();
+
+      return model;
+    }
+
+    throw result.getError();
+  }
+}

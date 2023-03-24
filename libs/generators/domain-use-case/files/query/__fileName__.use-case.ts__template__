@@ -1,0 +1,28 @@
+import { IUseCase } from '@sanctuary-nx/core/lib-util/ddd-core';
+import { Injectable } from '@nestjs/common';
+import { QUERY_CONTRACT, OUTPUT_CONTRACT } from '../../contracts';
+
+@Injectable()
+export class <%= className %>UseCase implements IUseCase<QUERY_CONTRACT, OUTPUT_CONTRACT>
+{
+  constructor(
+    private readonly repository: REPOSITORY_NAME_Repository,
+    private readonly modelToContractTransformer: ModelToContractTransformer
+  ) {}
+
+  async executeAsync(input: QUERY_CONTRACT): Promise<OUTPUT_CONTRACT> {
+    /*
+    BELOW ARE TYPICAL STEPS FOR A QUERY TO GIVE YOU SOMETHING TO START WITH...
+
+    // STEP 1: RETRIEVE MODEL FROM REPOSITORY
+    const model: MODEL_NAME = await this.repository.findOneByIdOrFail(input);
+
+    // STEP 2: TRANSFORM MODEL INTO CONTRACT
+    const contract: OUTPUT_CONTRACT = await this.modelToContractTransformer.transform(model);
+
+    return  contract;
+    */
+
+    throw new Error('<%= className %>UseCase Method not implemented.');
+  }
+}

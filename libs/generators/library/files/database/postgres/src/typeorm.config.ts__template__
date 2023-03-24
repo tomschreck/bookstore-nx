@@ -1,0 +1,44 @@
+import { ConfigService } from '@nestjs/config';
+import { DataSource } from 'typeorm';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+
+// THE FOLLOWING IS USED WHEN
+// CONFIGURING TYPEORM MODULE FOR ROOT ASYNC
+// FROM <%= fileName %>.module.ts
+export const getTypeOrmConfig = (configService: ConfigService): TypeOrmModuleOptions => {
+  const configuration: TypeOrmModuleOptions = {
+      type: 'postgres',
+      host: 'localhost',
+      database: configService.get('NX_CLOUD_SQL_DB'),
+      port: configService.get('NX_CLOUD_SQL_PORT'),
+      username: configService.get('NX_CLOUD_SQL_USER'),
+      password: configService.get('NX_CLOUD_SQL_PASSWORD'),
+      entities: ['./**/<%= fileName %>/**/*.entity.js'],
+      migrations: ['./**/<%= fileName %>/**/migrations/*{.ts,.js}'],
+      synchronize: false,
+      logging: true,
+      autoLoadEntities: true,
+      migrationsRun: true,
+    };
+
+  return configuration;
+};
+
+// THE FOLLOWING ARE USED WHEN
+// CREATING OR RUNNING MIGRATIONS
+// FROM migrations TARGET IN project.json
+const postgres_config: PostgresConnectionOptions = {
+  type: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: '[ENTER USER NAME HERE - ex: my_user]',
+  password: '[ENTER PASSWORD HERE - ex: password123]',
+  database: '<%= fileName %>',
+  entities: ['./src/2_infrastructure/entities/**/*.entity.ts'],
+  migrations: ['./src/_database/migrations/*{.ts,.js}'],
+  synchronize: false,
+  migrationsRun: true,
+};
+
+export default new DataSource(postgres_config);

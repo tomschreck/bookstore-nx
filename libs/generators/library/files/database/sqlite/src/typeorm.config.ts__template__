@@ -1,0 +1,31 @@
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
+import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions';
+
+// THE FOLLOWING IS USED WHEN
+// CONFIGURING TYPEORM MODULE FOR ROOT
+// FROM <%= fileName %>.module.module.ts
+export const typeOrmModuleOptions: TypeOrmModuleOptions = {
+  type: 'sqlite',
+  database: './libs/domain/lib-domain/<%= fileName %>/src/_database/<%= fileName %>.db',
+  entities: ['./**/<%= fileName %>/**/*.entity.js'],
+  migrations: ['./**/<%= fileName %>/**/migrations/*{.ts,.js}'],
+  synchronize: false,
+  logging: true,
+  autoLoadEntities: true,
+  migrationsRun: true,
+};
+
+// THE FOLLOWING ARE USED WHEN
+// CREATING OR RUNNING MIGRATIONS
+// FROM migrations TARGET IN project.json
+export const sqlite_config: SqliteConnectionOptions = {
+  type: 'sqlite',
+  database: './src/_database/<%= fileName %>.db',
+  entities: ['./src/2_infrastructure/entities/**/*.entity.ts'],
+  migrations: ['./src/_database/migrations/*{.ts,.js}'],
+  synchronize: false,
+  migrationsRun: true,
+};
+
+export default new DataSource(sqlite_config);

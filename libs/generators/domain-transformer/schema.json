@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "DomainTransformer",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Enter transformer name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "projectName": {
+      "type": "string",
+      "description": "Select a domain project",
+      "$default": {
+        "$source": "projectName",
+        "index": 1
+      }
+    },
+    "transformerType": {
+      "description": "Select transformer direction: contract-to-model, model-to-contract, or entity-to-model",
+      "enum": ["contract-to-model", "model-to-contract", "entity-to-model"]
+    }
+  },
+  "required": ["name", "projectName", "transformerType"]
+}

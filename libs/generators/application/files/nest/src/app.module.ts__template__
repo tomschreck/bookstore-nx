@@ -1,0 +1,16 @@
+import { Module } from '@nestjs/common';
+import { CustomLoggerService, LoggerFactory } from '@sanctuary-nx/core/lib-util/utilities';
+
+import { AppController } from './app.controller';
+
+@Module({
+  imports: [],
+  controllers: [AppController],
+  providers: [
+    {
+      provide: CustomLoggerService,
+      useFactory: () => LoggerFactory.createLogger(process.env['NX_ENVIRONMENT']),
+    },
+  ]
+})
+export class AppModule {}

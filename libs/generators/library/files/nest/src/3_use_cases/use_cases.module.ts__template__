@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common';
+import { ApplicationModule } from '../1_application';
+import { InfrastructureModule } from '../2_infrastructure';
+
+@Module({
+  imports: [ApplicationModule, InfrastructureModule],
+  providers: [],
+})
+export class UseCasesModule {}

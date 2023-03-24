@@ -1,0 +1,72 @@
+import { AggregateError, Either, DomainEntity, failure, success } from '@sanctuary-nx/core/lib-util/ddd-core';
+import { Expose } from 'class-transformer';
+import { IsNotEmpty, IsString, validate, ValidateIf, ValidationError } from 'class-validator';
+import { validateCondition } from '@sanctuary-nx/core/lib-util/utilities';
+import { SIGNAL_ID_HERE, SIGNAL_ID_HEREResult } from '@sanctuary-nx/shared/lib-util/shared-types';
+import { INPUT_CONTRACT, OUTPUT_CONTRACT } from '../contracts';
+
+export type <%= className %>Result = Either<
+  // Success
+  <%= className %>Model,
+  // Failures
+  AggregateError
+>;
+
+export class <%= className %>Model extends DomainEntity<INPUT_CONTRACT, SIGNAL_ID_HERE> implements OUTPUT_CONTRACT {
+
+  /*
+  TODO: FILL OUT PROPERTIES FROM INTERFACE
+  @Expose()
+  get id(): string {
+    const signalId: SIGNAL_ID_HERE = this.entityIdentifier;
+    return signalId.value;
+  }
+
+  @IsString()
+  @IsNotEmpty()
+  @Expose()
+  first_name!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ValidateIf(validateCondition)
+  @Expose()
+  some_optional_property?: string | null | undefined;
+  */
+
+  private constructor(props: INPUT_CONTRACT, id: SIGNAL_ID_HERE) {
+    super(props, id);
+    Object.assign(this, { ...props });
+  }
+
+  static async create(input: INPUT_CONTRACT, id?: string): Promise<<%= className %>Result> {
+    //#
+    //#
+    // STEP 1: CREATE & VALIDATE SIGNAL ID
+    const signalIdResult: SIGNAL_ID_HEREResult = SIGNAL_ID_HERE.create(id);
+
+    if (signalIdResult.isFailure() === true) {
+      return failure(signalIdResult.getError());
+    }
+
+    //#
+    //#
+    // STEP 2: CREATE ENTITY MODEL USING INPUT (INPUT_CONTRACT) & A VALID SIGNAL ID
+    const signalId: SIGNAL_ID_HERE = signalIdResult.getValue();
+    const model: <%= className %>Model = new <%= className %>Model(input, signalId);
+
+    //#
+    //#
+    // STEP 3: VALIDATE ENTITY MODEL
+    const errors: ValidationError[] = await validate(model);
+
+    if (errors && errors.length > 0) {
+      return failure(new AggregateError(errors, '<%= constantName %> DOMAIN MODEL ERROR(S)'));
+    }
+
+    //#
+    //#
+    // STEP 4: RETURN VALID ENTITY MODEL
+    return success(model);
+  }
+}

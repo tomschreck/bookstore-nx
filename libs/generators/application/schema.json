@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "Application",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "scope": {
+      "type": "string",
+      "description": "Scope tag for application.",
+      "alias": "s",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": {
+        "message": "What is the scope tag for the application?",
+        "type": "list",
+        "items": ["advisor-portal", "api", "workflow"]
+      }
+    },
+    "framework": {
+      "type": "string",
+      "description": "The primary framework used to develop application",
+      "alias": "f",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": {
+        "message": "Which framework is the primary technology used to develop application?",
+        "type": "list",
+        "items": ["nest", "node", "react"]
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "alias": "n",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "type": {
+      "type": "string",
+      "description": "Which type describes the application (only applicable to API scope)?",
+      "alias": "t",
+      "$default": {
+        "$source": "argv",
+        "index": 3
+      },
+      "x-prompt": {
+        "message": "Which type describes the application (only applicable to API scope)?",
+        "type": "list",
+        "items": ["graphql", "rest"]
+      }
+    },
+    "domain": {
+      "type": "string",
+      "description": "Feature domain tag for application.",
+      "alias": "d",
+      "$default": {
+        "$source": "argv",
+        "index": 4
+      },
+      "x-prompt": {
+        "message": "What is the feature domain tag for the application?",
+        "type": "list",
+        "items": ["advisor-portal", "inforce-policy", "magic-meeting", "notification"]
+      }
+    }
+  },
+  "required": ["scope", "framework", "name"]
+}

@@ -1,0 +1,29 @@
+import { AggregateError, Either, failure, success } from '@sanctuary-nx/core/lib-util/ddd-core';
+import { SidType } from '../../enums';
+import { SignalIdBase } from '../signal-id.base';
+
+export type <%= className %>SignalIdResult = Either<
+  // success
+  <%= className %>SignalId,
+  // Failures
+  AggregateError
+>;
+
+export class <%= className %>SignalId extends SignalIdBase {
+  private constructor(value?: string) {
+    super(SidType.SELECT_SID_TYPE_HERE, value);
+  }
+
+  static create(value?: string): <%= className %>SignalIdResult {
+    const <%= propertyName %>: <%= className %>SignalId = new <%= className %>SignalId(value);
+    const isValid: boolean = this.isValid(<%= propertyName %>);
+
+    if (!isValid) {
+      const aggregateError: AggregateError = this.createValidationError(value, '<%= className %>SignalId');
+
+      return failure(aggregateError);
+    }
+
+    return success(<%= propertyName %>);
+  }
+}

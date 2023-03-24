@@ -1,0 +1,3 @@
+export * from './3_use_cases';
+export * from './contracts';
+export * from './<%= fileName %>.module';

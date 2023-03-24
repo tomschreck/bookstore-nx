@@ -1,0 +1,45 @@
+terraform {
+  backend "gcs" {
+    bucket = "signaldevs-terraform-remote-state"
+    prefix = "<%= fileName %>/state"
+  }
+}
+
+provider "google" {
+  project = local.gcp_project_id
+}
+
+locals {
+  service_name   = "<%= fileName %>"
+  region         = "us-central1"
+  gcp_project_id = data.terraform_remote_state.terraform_gcp_environment_state.outputs.project_id
+}
+
+data "terraform_remote_state" "terraform_gcp_environment_state" {
+  backend   = "gcs"
+  workspace = terraform.workspace
+  config = {
+    bucket = "signaldevs-terraform-remote-state"
+    prefix = "terraform-environment/state"
+  }
+}
+
+resource "google_service_account" "<%= gcpName %>_service_account" {
+  account_id   = "<%= fileName %>"
+  display_name = "<%= name %> service account"
+}
+
+
+# WORKFLOW CONFIGURATION
+module "workflow_config" {
+  source                        = "../../../../../../terraform/modules/workflow"
+  gcp_project_id                = local.gcp_project_id
+  region                        = local.region
+  google_service_account_id     = "<%= fileName %>-workflow"
+  google_service_account_name   = "<%= name %> workflow"
+  cloud_run_name                = google_cloud_run_service.<%= gcpName %>_cloud_run_service.name
+  workflow_name                 = "<%= fileName %>-service-workflow"
+  workflow_description          = "<%= name %> workflow"
+  workflow_yaml_source_contents = templatefile("${path.module}/workflows/workflow.yaml", { <%= constantName %>_URL = google_cloud_run_service.<%= gcpName %>_cloud_run_service.status[0].url })
+  eventarc_name                 = "trigger-<%= fileName %>-workflow"
+}

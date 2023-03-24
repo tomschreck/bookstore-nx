@@ -1,0 +1,305 @@
+import { AggregateError } from '@sanctuary-nx/core/lib-util/ddd-core';
+import { expect } from 'chai';
+import { SidType } from '../../enums';
+import { <%= className %>SignalId, <%= className %>SignalIdResult } from './<%= fileName %>.signal-id';
+
+describe('<%= className %>SignalId value object', () => {
+  describe('Create new <%= className %>SignalId with prefix', () => {
+    let <%= propertyName %>Result: <%= className %>SignalIdResult;
+
+    beforeAll(async () => {
+      <%= propertyName %>Result = <%= className %>SignalId.create();
+    });
+
+    it('result should not be null', () => {
+      expect(<%= propertyName %>Result).to.not.be.null;
+    });
+
+    it('result should be a success', () => {
+      expect(<%= propertyName %>Result.isSuccess()).to.be.true;
+    });
+
+    it(`value should not have any dashes`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      const hasDashes: boolean = <%= propertyName %>.value.indexOf('-') == -1;
+
+      // ASSERT
+      expect(hasDashes).to.be.true;
+    });
+
+    it(`value should be a new identifier`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      const isNewIdentifier: boolean = <%= propertyName %>.isNewIdentifier;
+
+      // ASSERT
+      expect(isNewIdentifier).to.be.true;
+    });
+
+    it(`value should be prefixed with ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const firstTwoCharacters: string = <%= propertyName %>.value.substring(0, 2);
+
+      // ASSERT
+      expect(firstTwoCharacters).to.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+
+    it(`sidType should be ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      // ASSERT
+      expect(<%= propertyName %>.sidType).to.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+  });
+
+  describe('Existing <%= className %>SignalId with prefix', () => {
+    const good<%= className %>SignalId: string = `${SidType.SELECT_SID_TYPE_HERE}f5582b510527a5f5e543beb691ad13ef`;
+    const goodGuid: string = 'f5582b51-0527-a5f5-e543-beb691ad13ef';
+    let <%= propertyName %>Result: <%= className %>SignalIdResult;
+
+    beforeAll(async () => {
+      <%= propertyName %>Result = <%= className %>SignalId.create(good<%= className %>SignalId);
+    });
+
+    it('result should not be null', () => {
+      expect(<%= propertyName %>Result).to.not.be.null;
+    });
+
+    it('result should be a success', () => {
+      expect(<%= propertyName %>Result.isSuccess()).to.be.true;
+    });
+
+    it(`value should be ${good<%= className %>SignalId}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      // ASSERT
+      expect(<%= propertyName %>.value).to.equal(good<%= className %>SignalId);
+    });
+
+    it(`value should NOT be a new identifier`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      const isNewIdentifier: boolean = <%= propertyName %>.isNewIdentifier;
+
+      // ASSERT
+      expect(isNewIdentifier).to.be.false;
+    });
+
+    it(`value should be prefixed with ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const firstTwoCharacters: string = <%= propertyName %>.value.substring(0, 2);
+
+      // ASSERT
+      expect(firstTwoCharacters).to.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+
+    it(`sidType should be ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      // ASSERT
+      expect(<%= propertyName %>.sidType).to.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+
+    it(`guid should be ${goodGuid}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const guid: string = <%= propertyName %>.toGuid();
+
+      // ASSERT
+      expect(guid).to.equal(goodGuid);
+    });
+  });
+
+  describe('Existing <%= className %>SignalId without prefix', () => {
+    const good<%= className %>SignalId: string = `f5582b510527a5f5e543beb691ad13ef`;
+    const goodGuid: string = 'f5582b51-0527-a5f5-e543-beb691ad13ef';
+    let <%= propertyName %>Result: <%= className %>SignalIdResult;
+
+    beforeAll(async () => {
+      <%= propertyName %>Result = <%= className %>SignalId.create(good<%= className %>SignalId);
+    });
+
+    it('should not be null', () => {
+      expect(<%= propertyName %>Result).to.not.be.null;
+    });
+
+    it('should be a success', () => {
+      expect(<%= propertyName %>Result.isSuccess()).to.be.true;
+    });
+
+    it(`value should be ${good<%= className %>SignalId}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      // ASSERT
+      expect(<%= propertyName %>.value).to.equal(good<%= className %>SignalId);
+    });
+
+    it(`value should NOT be a new identifier`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      const isNewIdentifier: boolean = <%= propertyName %>.isNewIdentifier;
+
+      // ASSERT
+      expect(isNewIdentifier).to.be.false;
+    });
+
+    it(`value should NOT be prefixed with ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const firstTwoCharacters: string = <%= propertyName %>.value.substring(0, 2);
+
+      // ASSERT
+      expect(firstTwoCharacters).to.not.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+
+    it(`sidType should be ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      // ASSERT
+      expect(<%= propertyName %>.sidType).to.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+
+    it(`guid should be ${goodGuid}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const guid: string = <%= propertyName %>.toGuid();
+
+      // ASSERT
+      expect(guid).to.equal(goodGuid);
+    });
+  });
+
+  describe('Existing GUID without prefix', () => {
+    const guid: string = `8822cc61-8644-42e2-b5d8-07cf24b4bb9e`;
+    let <%= propertyName %>Result: <%= className %>SignalIdResult;
+
+    beforeAll(async () => {
+      <%= propertyName %>Result = <%= className %>SignalId.create(guid);
+    });
+
+    it('result should not be null', () => {
+      expect(<%= propertyName %>Result).to.not.be.null;
+    });
+
+    it('result should be a success', () => {
+      expect(<%= propertyName %>Result.isSuccess()).to.be.true;
+    });
+
+    it(`value should be ${SidType.SELECT_SID_TYPE_HERE}${guid.replace(/-/gi, '')}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const expectedValue: string = `${SidType.SELECT_SID_TYPE_HERE}${guid.replace(/-/gi, '')}`;
+
+      // ASSERT
+      expect(<%= propertyName %>.value).to.equal(expectedValue);
+    });
+
+    it(`value should NOT be a new identifier`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      const isNewIdentifier: boolean = <%= propertyName %>.isNewIdentifier;
+
+      // ASSERT
+      expect(isNewIdentifier).to.be.false;
+    });
+
+    it(`value should be prefixed with ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const firstTwoCharacters: string = <%= propertyName %>.value.substring(0, 2);
+
+      // ASSERT
+      expect(firstTwoCharacters).to.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+
+    it(`sidType should be ${SidType.SELECT_SID_TYPE_HERE}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+
+      // ASSERT
+      expect(<%= propertyName %>.sidType).to.equal(SidType.SELECT_SID_TYPE_HERE);
+    });
+
+    it(`guid should be ${guid}`, () => {
+      // ARRANGE
+      // ACT
+      const <%= propertyName %>: <%= className %>SignalId = <%= propertyName %>Result.getValue();
+      const guid: string = <%= propertyName %>.toGuid();
+
+      // ASSERT
+      expect(guid).to.equal(guid);
+    });
+  });
+
+  describe('Bad <%= className %>SignalId', () => {
+    const bad<%= className %>SignalId: string = 'BAD_ID';
+    let <%= propertyName %>Result: <%= className %>SignalIdResult;
+
+    beforeAll(async () => {
+      <%= propertyName %>Result = <%= className %>SignalId.create(bad<%= className %>SignalId);
+    });
+
+    it('should not be null', () => {
+      // ARRANGE
+      // ACT
+      // ASSERT
+      expect(<%= propertyName %>Result).to.not.be.null;
+    });
+
+    it('should be a failure', () => {
+      // ARRANGE
+      // ACT
+      // ASSERT
+      expect(<%= propertyName %>Result.isFailure()).to.be.true;
+    });
+
+    it(`error should not be null)`, () => {
+      // ARRANGE
+      // ACT
+      const aggregateError: AggregateError = <%= propertyName %>Result.getError();
+
+      // ASSERT
+      expect(aggregateError).to.not.be.null;
+    });
+
+    it(`error message should be <%= className %>SignalId is invalid)`, () => {
+      // ARRANGE
+      // ACT
+      const aggregateError: AggregateError = <%= propertyName %>Result.getError();
+
+      // ASSERT
+      expect(aggregateError.operationErrorMessage).to.equal('<%= className %>SignalId is invalid');
+    });
+  });
+});
