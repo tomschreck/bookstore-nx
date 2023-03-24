@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "internal-plugins",
+  "version": "0.0.1",
+  "generators": {
+    "application": {
+      "factory": "./src/generators/application/generator",
+      "schema": "./src/generators/application/schema.json",
+      "description": "application generator"
+    },
+    "library": {
+      "factory": "./src/generators/library/generator",
+      "schema": "./src/generators/library/schema.json",
+      "description": "library generator"
+    },
+    "update-generator-schemas": {
+      "factory": "./src/generators/update-generator-schemas/generator",
+      "schema": "./src/generators/update-generator-schemas/schema.json",
+      "description": "update-generator-schemas generator"
+    },
+    "domain use case": {
+      "factory": "./src/generators/domain-use-case/generator",
+      "schema": "./src/generators/domain-use-case/schema.json",
+      "description": "generates stubbed use case nest service"
+    },
+    "domain-repository": {
+      "factory": "./src/generators/domain-repository/generator",
+      "schema": "./src/generators/domain-repository/schema.json",
+      "description": "domain repository"
+    },
+    "domain transformer": {
+      "factory": "./src/generators/domain-transformer/generator",
+      "schema": "./src/generators/domain-transformer/schema.json",
+      "description": "transforms something into something else"
+    },
+    "domain model": {
+      "factory": "./src/generators/domain-model/generator",
+      "schema": "./src/generators/domain-model/schema.json",
+      "description": "domain model"
+    },
+    "domain-whole-enchillada": {
+      "factory": "./src/generators/domain-whole-enchillada/generator",
+      "schema": "./src/generators/domain-whole-enchillada/schema.json",
+      "description": "generates a lot of different things"
+    },
+    "domain-entity": {
+      "factory": "./src/generators/domain-entity/generator",
+      "schema": "./src/generators/domain-entity/schema.json",
+      "description": "generate domain entity seed file"
+    },
+    "signal id": {
+      "factory": "./src/generators/signal-id/generator",
+      "schema": "./src/generators/signal-id/schema.json",
+      "description": "generator for signal id (SID) types"
+    },
+    "workflow gcp": {
+      "factory": "./src/generators/workflow-gcp/generator",
+      "schema": "./src/generators/workflow-gcp/schema.json",
+      "description": "Add GCP workflow to an existing project"
+    }
+  }
+}
