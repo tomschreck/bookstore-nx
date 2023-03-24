@@ -1,0 +1,35 @@
+{
+  "name": "core-lib-util-ddd-core",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/core/lib-util/ddd-core/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/core/lib-util/ddd-core",
+        "tsConfig": "libs/core/lib-util/ddd-core/tsconfig.lib.json",
+        "packageJson": "libs/core/lib-util/ddd-core/package.json",
+        "main": "libs/core/lib-util/ddd-core/src/index.ts",
+        "assets": ["libs/core/lib-util/ddd-core/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/core/lib-util/ddd-core/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/core/lib-util/ddd-core/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:core", "type:lib-util", "framework:node"]
+}
